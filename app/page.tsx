@@ -2,7 +2,6 @@
 
 import {
   ArrowDownRight,
-  ArrowLeft,
   ArrowRight,
   BarChart3,
   BriefcaseBusiness,
@@ -24,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { SiteFooter } from '@/components/site-footer';
+import { courses } from '@/lib/course-data';
 
 const services = [
   [
@@ -113,54 +113,19 @@ const services = [
   [
     '09',
     BriefcaseBusiness,
-    'Portfolio Management Guidance',
-    'Educational guidance to help you understand allocation, diversification and review disciplines.',
+    'Market Mentorship & Workshops',
+    'Live, practical sessions that help you build research habits, sharpen decision-making and learn from real market scenarios.',
     [
-      'Model portfolio concepts',
-      'Portfolio review framework',
-      'Rebalancing education',
+      'Live market walkthroughs',
+      'Interactive Q&A sessions',
+      'Trading journal reviews',
     ],
   ],
 ] as const;
 
-const courses = [
-  [
-    'BEGINNER',
-    '40 Hours',
-    '2,400+',
-    '4.9',
-    'Stock Market Foundation Course',
-    'Everything to start your investment journey: Demat accounts, order types, fundamental analysis and valuation basics.',
-    '/course-stock-market-foundation.mp4',
-  ],
-  [
-    'INTERMEDIATE',
-    '60 Hours',
-    '1,800+',
-    '4.8',
-    'Technical Analysis Masterclass',
-    'Deep dive into charts, patterns, indicators and price action. Learn to read markets like a professional analyst.',
-    '/course-technical-analysis.mp4',
-  ],
-  [
-    'ADVANCED',
-    '90 Hours',
-    '940+',
-    '5.0',
-    'Pro Trader Complete Program',
-    'Advanced derivatives, options strategies, algo basics and portfolio management for serious full-time traders.',
-    '/course-pro-trader.mp4',
-  ],
-  [
-    'ADVANCED',
-    '32 Hours',
-    '760+',
-    '4.9',
-    'Options Strategy Lab',
-    'Build practical option strategies with clear risk, payoff and position-management frameworks.',
-    '/course-options-strategy.mp4',
-  ],
-] as const;
+const loopingCourses = [0, 1].flatMap((cycle) =>
+  courses.map((course, courseIndex) => ({ course, courseIndex, cycle })),
+);
 
 const complaintSources = [
   'Directly from Investors',
@@ -191,7 +156,7 @@ const pricingServices = [
   ['Commodity Advisory (MCX)', 2999],
   ['Risk Management Training', 1999],
   ['Learning Programmes & Courses', 4999],
-  ['Portfolio Management Guidance', 3499],
+  ['Market Mentorship & Workshops', 3499],
 ] as const;
 
 const pricingTerms = {
@@ -210,9 +175,12 @@ const pricingTerms = {
 
 const navigation = [
   ['Home', '#home'],
-  ['About', '#about'],
-  ['Research Services', '#services'],
-  ['Learning', '#learning'],
+  ['About', '/about'],
+  ['Services', '/services'],
+  ['Learning', '/learning'],
+  ['Compliance', '/compliance'],
+  ['Workshops', '/workshops'],
+  ['Contact', '/contact'],
 ];
 
 const complianceDocuments = [
@@ -275,7 +243,6 @@ export default function Home() {
   const [servicesVisible, setServicesVisible] = useState(false);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [guidanceVisible, setGuidanceVisible] = useState(false);
-  const [showAllSolutions, setShowAllSolutions] = useState(false);
   const [courseSlide, setCourseSlide] = useState(0);
   const [selectedPricingServices, setSelectedPricingServices] = useState<
     string[]
@@ -287,18 +254,17 @@ export default function Home() {
   const aboutRef = useRef<HTMLElement | null>(null);
   const guidanceRef = useRef<HTMLElement | null>(null);
   const courseRailRef = useRef<HTMLDivElement | null>(null);
-  const moveCourses = (direction: number) => {
-    const next = (courseSlide + direction + courses.length) % courses.length;
+  const courseOffsetRef = useRef(0);
+  const courseLoopWidthRef = useRef(0);
+  const moveCourses = () => {
     const rail = courseRailRef.current;
-    const card = rail?.querySelector<HTMLElement>('.course-slide-card');
-    if (rail && card)
-      rail.scrollTo({
-        left:
-          next *
-          (card.offsetWidth + Number.parseFloat(getComputedStyle(rail).gap)),
-        behavior: 'smooth',
-      });
-    setCourseSlide(next);
+    const loopWidth = courseLoopWidthRef.current;
+    if (!rail || !loopWidth) return;
+
+    courseOffsetRef.current =
+      (courseOffsetRef.current + loopWidth / courses.length) % loopWidth;
+    rail.style.transform = `translate3d(-${courseOffsetRef.current}px, 0, 0)`;
+    setCourseSlide((current) => (current + 1) % courses.length);
   };
   const togglePricingService = (service: string) => {
     setQuoteReady(false);
@@ -320,6 +286,60 @@ export default function Home() {
       currency: 'INR',
       maximumFractionDigits: 0,
     }).format(value);
+  useEffect(() => {
+    const rail = courseRailRef.current;
+    if (!rail) return;
+
+    const measureLoop = () => {
+      const cards = rail.querySelectorAll<HTMLElement>('.course-slide-card');
+      const firstCard = cards[0];
+      const repeatedFirstCard = cards[courses.length];
+      if (!firstCard || !repeatedFirstCard) return;
+
+      courseLoopWidthRef.current =
+        repeatedFirstCard.offsetLeft - firstCard.offsetLeft;
+      courseOffsetRef.current %= courseLoopWidthRef.current;
+    };
+    const renderLoop = () => {
+      rail.style.transform = `translate3d(-${courseOffsetRef.current}px, 0, 0)`;
+    };
+    measureLoop();
+    renderLoop();
+
+    let animationFrame = 0;
+    let previousTime = performance.now();
+    let currentCourse = 0;
+    const animateCourseRail = (time: number) => {
+      const elapsed = Math.min(time - previousTime, 48);
+      previousTime = time;
+      const loopWidth = courseLoopWidthRef.current;
+
+      if (loopWidth) {
+        courseOffsetRef.current =
+          (courseOffsetRef.current + elapsed * 0.072) % loopWidth;
+        renderLoop();
+        const nextCourse = Math.floor(
+          courseOffsetRef.current / (loopWidth / courses.length),
+        );
+        if (nextCourse !== currentCourse) {
+          currentCourse = nextCourse;
+          setCourseSlide(nextCourse);
+        }
+      }
+      animationFrame = window.requestAnimationFrame(animateCourseRail);
+    };
+    animationFrame = window.requestAnimationFrame(animateCourseRail);
+    const resizeObserver = new ResizeObserver(() => {
+      measureLoop();
+      renderLoop();
+    });
+    resizeObserver.observe(rail);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+    };
+  }, []);
   useEffect(() => {
     const node = servicesRef.current;
     if (!node) return;
@@ -470,7 +490,7 @@ export default function Home() {
           </div>
           <div className="about-orange-shape" aria-hidden="true" />
           <div className="about-profile-card">
-            <img src="/rajesh-sharma.png" alt="" />
+            <img src="/rajesh-seated-profile.png" alt="Rajesh Sharma" />
             <div>
               <strong>Rajesh Sharma</strong>
               <span>SEBI Registered Research Analyst</span>
@@ -489,7 +509,7 @@ export default function Home() {
             <strong>
               1M<sup>+</sup>
             </strong>
-            <img src="/rajesh-sharma.png" alt="" />
+            <img src="/rajesh-standing-cutout.png" alt="Rajesh Sharma" />
           </div>
         </div>
         <div className="about-reference-copy">
@@ -556,17 +576,13 @@ export default function Home() {
                 for your business
               </h2>
             </div>
-            <button
+            <a
               className="view-services"
-              type="button"
-              aria-expanded={showAllSolutions}
-              onClick={() => setShowAllSolutions(!showAllSolutions)}
+              href="/services"
             >
-              {showAllSolutions
-                ? 'Show featured services'
-                : 'View all services'}{' '}
+              View all services{' '}
               <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
           <div className="solution-progress" aria-hidden="true">
             <i />
@@ -574,7 +590,7 @@ export default function Home() {
           </div>
           <div className="solutions-cards">
             {services
-              .slice(0, showAllSolutions ? services.length : 3)
+              .slice(0, 3)
               .map(([number, Icon, title, description], index) => (
                 <article
                   key={title}
@@ -810,12 +826,11 @@ export default function Home() {
         </div>
         <div className="course-viewport">
           <div className="course-rail" ref={courseRailRef}>
-            {courses.map(
-              (
-                [level, duration, learners, rating, title, description, video],
-                index,
-              ) => (
-                <article className="course-slide-card" key={title}>
+            {loopingCourses.map(
+              ({ course, courseIndex, cycle }) => {
+                const { level, duration, learners, rating, title, description, video, slug } = course;
+                return (
+                <article className="course-slide-card" key={`${title}-${cycle}`}>
                   <div className="course-cover">
                     <video
                       src={video}
@@ -832,7 +847,7 @@ export default function Home() {
                     </span>
                     <a
                       className="course-hover-link"
-                      href="#disclaimer"
+                      href={`/learning/${slug}`}
                       aria-label={`View details for ${title}`}
                     >
                       <ArrowRight size={25} />
@@ -853,14 +868,15 @@ export default function Home() {
                     <h3>{title}</h3>
                     <p>{description}</p>
                     <div className="course-action">
-                      <a href="#disclaimer">
+                      <a href={`/learning/${slug}`}>
                         Enrol now <ArrowRight size={16} />
                       </a>
-                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <span>{String(courseIndex + 1).padStart(2, '0')}</span>
                     </div>
                   </div>
                 </article>
-              ),
+                );
+              },
             )}
           </div>
         </div>
@@ -871,14 +887,7 @@ export default function Home() {
           <div className="course-buttons">
             <button
               type="button"
-              onClick={() => moveCourses(-1)}
-              aria-label="Previous courses"
-            >
-              <ArrowLeft size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => moveCourses(1)}
+              onClick={moveCourses}
               aria-label="Next courses"
             >
               <ArrowRight size={18} />

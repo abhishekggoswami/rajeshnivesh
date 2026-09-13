@@ -2,16 +2,19 @@ import { ArrowRight, Mail } from 'lucide-react';
 
 const navigation = [
   ['Home', '/'],
-  ['About', '/#about'],
-  ['Research Services', '/#services'],
-  ['Learning', '/#learning'],
+  ['About', '/about'],
+  ['Research Services', '/services'],
+  ['Learning', '/learning'],
+  ['Compliance', '/compliance'],
+  ['Workshops', '/workshops'],
+  ['Contact', '/contact'],
 ] as const;
 
 const researchServices = [
   ['Market Analysis & Research', '/market-analysis-research'],
-  ['Intraday & BTST Calls', '/#services'],
-  ['Options Trading Advisory', '/#services'],
-  ['Index Trading', '/#services'],
+  ['Intraday & BTST Calls', '/services'],
+  ['Options Trading Advisory', '/services'],
+  ['Index Trading', '/services'],
 ] as const;
 
 const complianceDocuments = [
