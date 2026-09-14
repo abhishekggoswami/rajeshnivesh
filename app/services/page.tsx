@@ -16,14 +16,14 @@ import { SiteHeader } from '@/components/site-header';
 
 const services = [
   ['01', BarChart3, 'Market Analysis & Research', 'Daily technical and fundamental market research, organised to support informed decisions.', '/service-market-analysis.mp4', '/market-analysis-research'],
-  ['02', CandlestickChart, 'Intraday & BTST Calls', 'Structured intraday and buy-today-sell-tomorrow research calls with clear trade parameters.', '/service-intraday-btst.mp4', '/#disclaimer'],
-  ['03', Target, 'Options Trading Advisory', 'Options research for index and stock participants, with clarity on strike selection and risk.', '/service-options-advisory.mp4', '/#disclaimer'],
-  ['04', TrendingUp, 'Index Trading', 'Research-led Nifty and Bank Nifty ideas designed around defined risk and market context.', '/service-index-trading.mp4', '/#disclaimer'],
-  ['05', Compass, 'Delivery & Swing Trading', 'Curated delivery and swing trade research for investors seeking quality opportunities.', '/service-delivery-swing.mp4', '/#disclaimer'],
-  ['06', Landmark, 'Commodity Advisory (MCX)', 'Macro-aware commodity research across Gold, Silver, Crude Oil and Natural Gas.', '/service-commodity-advisory.mp4', '/#disclaimer'],
-  ['07', ShieldCheck, 'Risk Management Training', 'Build a more resilient approach with practical capital-protection and position-sizing principles.', '/service-risk-management.mp4', '/#disclaimer'],
-  ['08', GraduationCap, 'Learning Programmes & Courses', 'Structured learning tracks that take market participants from core concepts to applied analysis.', '/service-learning-programmes.mp4', '/#learning'],
-  ['09', BriefcaseBusiness, 'Market Mentorship & Workshops', 'Live, practical sessions that help you build research habits, sharpen decision-making and learn from real market scenarios.', '/service-portfolio-management.mp4', '/#disclaimer'],
+  ['02', CandlestickChart, 'Intraday & BTST Calls', 'Structured intraday and buy-today-sell-tomorrow research calls with clear trade parameters.', '/service-intraday-btst.mp4', '/services/intraday-btst-calls'],
+  ['03', Target, 'Options Trading Advisory', 'Options research for index and stock participants, with clarity on strike selection and risk.', '/service-options-advisory.mp4', '/services/options-trading-advisory'],
+  ['04', TrendingUp, 'Index Trading', 'Research-led Nifty and Bank Nifty ideas designed around defined risk and market context.', '/service-index-trading.mp4', '/services/index-trading'],
+  ['05', Compass, 'Delivery & Swing Trading', 'Curated delivery and swing trade research for investors seeking quality opportunities.', '/service-delivery-swing.mp4', '/services/delivery-swing-trading'],
+  ['06', Landmark, 'Commodity Advisory (MCX)', 'Macro-aware commodity research across Gold, Silver, Crude Oil and Natural Gas.', '/service-commodity-advisory.mp4', '/services/commodity-advisory-mcx'],
+  ['07', ShieldCheck, 'Risk Management Training', 'Build a more resilient approach with practical capital-protection and position-sizing principles.', '/service-risk-management.mp4', '/services/risk-management-training'],
+  ['08', GraduationCap, 'Learning Programmes & Courses', 'Structured learning tracks that take market participants from core concepts to applied analysis.', '/service-learning-programmes.mp4', '/services/learning-programmes-courses'],
+  ['09', BriefcaseBusiness, 'Market Mentorship & Workshops', 'Live, practical sessions that help you build research habits, sharpen decision-making and learn from real market scenarios.', '/service-portfolio-management.mp4', '/services/market-mentorship-workshops'],
 ] as const;
 
 export default function ServicesPage() {
@@ -31,24 +31,23 @@ export default function ServicesPage() {
     <main className="services-list-page">
       <section className="services-page-landing" aria-labelledby="services-title">
         <video autoPlay muted loop playsInline aria-hidden="true">
-          <source src="/hero-market-video.mp4" type="video/mp4" />
+          <source src="/landing-background.mp4" type="video/mp4" />
         </video>
         <div className="services-page-landing-overlay" />
         <SiteHeader active="Services" />
         <div className="services-page-landing-copy">
           <p><span>*</span> Research-led services</p>
           <h1 id="services-title">
-            Built for more
+            Research for more
             <br />
-            <strong>confident market decisions.</strong>
+            <strong>confident decisions.</strong>
           </h1>
           <p>
-            Research, trading and learning services designed around clarity,
+            Research, trading and learning support shaped around clarity,
             preparation and disciplined participation.
           </p>
           <a href="#all-services">Explore all services <ArrowRight size={17} /></a>
         </div>
-        <img src="/rajesh-standing-cutout.png" alt="Rajesh Sharma" />
       </section>
 
       <section id="all-services" className="services-reference services-list-section is-visible" aria-label="All services">

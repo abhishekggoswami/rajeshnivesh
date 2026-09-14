@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { SiteFooter } from '@/components/site-footer';
+import { ServicesFaq } from '@/components/services-faq';
 import { courses } from '@/lib/course-data';
 
 const services = [
@@ -229,7 +230,7 @@ const complianceDocuments = [
 function Brand() {
   return (
     <a className="brand" href="#home" aria-label="Rajesh Nivesh home">
-      <img src="/rajesh-nivesh-logo.png" alt="" />
+      <img src="/rajesh-nivesh-brandmark.png" alt="Rajesh Nivesh" />
       <span className="brand-name">
         <b>Rajesh</b>
         <em>निवेश</em>
@@ -415,11 +416,22 @@ export default function Home() {
           </button>
           {menuOpen && (
             <nav className="mobile-nav" aria-label="Mobile navigation">
-              {navigation.map(([label, href]) => (
-                <a key={label} href={href} onClick={() => setMenuOpen(false)}>
-                  {label}
-                </a>
-              ))}
+              <a
+                className="mobile-menu-brand"
+                href="#home"
+                aria-label="Rajesh Nivesh home"
+                onClick={() => setMenuOpen(false)}
+              >
+                <img src="/rajesh-nivesh-brandmark.png" alt="Rajesh Nivesh" />
+              </a>
+              <span className="mobile-menu-rn" aria-hidden="true">RN</span>
+              <div className="mobile-menu-links">
+                {navigation.map(([label, href]) => (
+                  <a key={label} href={href} onClick={() => setMenuOpen(false)}>
+                    {label}
+                  </a>
+                ))}
+              </div>
             </nav>
           )}
         </header>
@@ -431,13 +443,13 @@ export default function Home() {
           playsInline
           aria-hidden="true"
         >
-          <source src="/hero-market-video.mp4" type="video/mp4" />
+          <source src="/landing-background.mp4" type="video/mp4" />
         </video>
         <div className="hero-copy-reference">
           <h1>
             Navigate Markets
             <br />
-            With <span>Research-Led</span>
+            With <span>Research‑Led</span>
             <br />
             Clarity &amp; Discipline
           </h1>
@@ -461,7 +473,7 @@ export default function Home() {
         <div className="hero-scroll">
           Scroll down <ArrowDownRight />
         </div>
-        <div className="experience-card">
+        <div className="experience-card experience-card-desktop" aria-label="Rajesh Nivesh experience">
           <div>
             <strong>
               16<sup>+</sup>
@@ -474,6 +486,19 @@ export default function Home() {
           </div>
           <img src="/hero-experience-portrait.png" alt="" />
         </div>
+      </section>
+      <section className="experience-card experience-card-mobile" aria-label="Rajesh Nivesh experience">
+          <div>
+            <strong>
+              16<sup>+</sup>
+            </strong>
+            <p>
+              Years of market
+              <br />
+              learning &amp; research
+            </p>
+          </div>
+          <span className="experience-rn" aria-hidden="true">RN</span>
       </section>
       <section
         ref={aboutRef}
@@ -1182,6 +1207,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <ServicesFaq variant="home" />
       <SiteFooter />
     </main>
   );

@@ -3,10 +3,11 @@ import {
   BarChart3,
   Check,
   Mail,
-  Menu,
   ShieldCheck,
 } from 'lucide-react';
 import { SiteFooter } from '@/components/site-footer';
+import { ServicesFaq } from '@/components/services-faq';
+import { SiteHeader } from '@/components/site-header';
 
 export default function MarketAnalysisResearchPage() {
   return (
@@ -20,33 +21,10 @@ export default function MarketAnalysisResearchPage() {
           playsInline
           aria-hidden="true"
         >
-          <source src="/service-market-analysis.mp4" type="video/mp4" />
+          <source src="/landing-background.mp4" type="video/mp4" />
         </video>
         <div className="service-detail-hero-overlay" />
-        <header className="service-detail-header">
-          <a
-            className="service-detail-brand"
-            href="/"
-            aria-label="Rajesh Nivesh home"
-          >
-            <img src="/rajesh-nivesh-logo.png" alt="Rajesh Nivesh" />
-          </a>
-          <nav aria-label="Service page navigation">
-            <a href="/">Home</a>
-            <a href="#overview">Overview</a>
-            <a href="#research">Research approach</a>
-          </nav>
-          <a className="service-detail-back" href="/">
-            Back to home <ArrowRight size={15} />
-          </a>
-          <button
-            className="service-detail-menu"
-            type="button"
-            aria-label="Menu"
-          >
-            <Menu size={21} />
-          </button>
-        </header>
+        <SiteHeader active="Services" />
         <div className="service-detail-hero-copy">
           <p className="service-detail-kicker">
             <span /> Research service 01
@@ -255,6 +233,7 @@ export default function MarketAnalysisResearchPage() {
         </a>
       </section>
 
+      <ServicesFaq variant="research" />
       <SiteFooter />
     </main>
   );

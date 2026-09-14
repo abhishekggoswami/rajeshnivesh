@@ -12,9 +12,9 @@ const navigation = [
 
 const researchServices = [
   ['Market Analysis & Research', '/market-analysis-research'],
-  ['Intraday & BTST Calls', '/services'],
-  ['Options Trading Advisory', '/services'],
-  ['Index Trading', '/services'],
+  ['Intraday & BTST Calls', '/services/intraday-btst-calls'],
+  ['Options Trading Advisory', '/services/options-trading-advisory'],
+  ['Index Trading', '/services/index-trading'],
 ] as const;
 
 const complianceDocuments = [
@@ -63,7 +63,7 @@ const complianceDocuments = [
 function FooterBrand() {
   return (
     <a className="brand" href="/" aria-label="Rajesh Nivesh home">
-      <img src="/rajesh-nivesh-logo.png" alt="" />
+      <img src="/rajesh-nivesh-brandmark.png" alt="Rajesh Nivesh" />
       <span className="brand-name">
         <b>Rajesh</b>
         <em>निवेश</em>

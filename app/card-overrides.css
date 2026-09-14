@@ -797,6 +797,252 @@
   }
 }
 
+/*
+ * Inner-page landing baseline
+ *
+ * These six routes share the same viewport contract.  The hero may occupy
+ * about 70% of the available screen, but it is never shorter than the space
+ * required for its navigation, headline, supporting copy and primary action.
+ * Keeping this rule last also prevents page-specific responsive rules above
+ * from letting a heading or button fall below the clipped video surface.
+ */
+:is(
+  .services-page-landing,
+  .about-page-hero,
+  .learning-page-hero,
+  .compliance-hero,
+  .workshops-hero,
+  .contact-hero
+) {
+  min-height: max(70svh, 600px);
+  height: auto;
+  margin: clamp(18px, 2vw, 30px) clamp(18px, 2vw, 30px) 0;
+}
+
+:is(
+  .services-page-landing-copy,
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child
+) {
+  width: min(60%, 690px);
+  max-width: calc(100% - 48px);
+  padding: clamp(118px, 15svh, 150px) 0 48px clamp(28px, 8vw, 128px);
+}
+
+:is(
+  .services-page-landing h1,
+  .about-page-hero h1,
+  .learning-page-hero h1,
+  .compliance-hero h1,
+  .workshops-hero h1,
+  .contact-hero h1
+) {
+  max-width: 100%;
+  font-size: clamp(2.55rem, 4.5vw, 4.75rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+:is(
+  .services-page-landing-copy > p:nth-of-type(2),
+  .about-page-hero-copy > p:last-child,
+  .learning-page-hero > div:last-child > p:nth-of-type(2),
+  .compliance-hero > div:last-child > p:nth-of-type(2),
+  .workshops-hero > div:last-child > p:nth-of-type(2),
+  .contact-hero > div:last-child > p:nth-of-type(2)
+) {
+  max-width: 34rem;
+  overflow-wrap: anywhere;
+}
+
+:is(
+  .services-page-landing-copy > a,
+  .learning-page-hero > div:last-child > a,
+  .compliance-hero > div:last-child > a
+) {
+  max-width: 100%;
+  white-space: normal;
+}
+
+@media (max-width: 1024px) and (min-width: 701px) {
+  :is(
+    .services-page-landing-copy,
+    .about-page-hero-copy,
+    .learning-page-hero > div:last-child,
+    .compliance-hero > div:last-child,
+    .workshops-hero > div:last-child,
+    .contact-hero > div:last-child
+  ) {
+    width: min(76%, 640px);
+    padding-left: clamp(28px, 7vw, 72px);
+  }
+}
+
+@media (max-width: 700px) {
+  :is(
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero
+  ) {
+    min-height: 620px;
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  :is(
+    .services-page-landing-copy,
+    .about-page-hero-copy,
+    .learning-page-hero > div:last-child,
+    .compliance-hero > div:last-child,
+    .workshops-hero > div:last-child,
+    .contact-hero > div:last-child
+  ) {
+    width: 100%;
+    max-width: none;
+    padding: 104px 22px 48px;
+  }
+
+  :is(
+    .services-page-landing h1,
+    .about-page-hero h1,
+    .learning-page-hero h1,
+    .compliance-hero h1,
+    .workshops-hero h1,
+    .contact-hero h1
+  ) {
+    font-size: clamp(2.55rem, 11vw, 3.9rem);
+    line-height: 1.03;
+  }
+
+  :is(
+    .services-page-landing-copy > p:nth-of-type(2),
+    .about-page-hero-copy > p:last-child,
+    .learning-page-hero > div:last-child > p:nth-of-type(2),
+    .compliance-hero > div:last-child > p:nth-of-type(2),
+    .workshops-hero > div:last-child > p:nth-of-type(2),
+    .contact-hero > div:last-child > p:nth-of-type(2)
+  ) {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 380px) {
+  :is(
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero
+  ) {
+    min-height: 640px;
+  }
+}
+
+/* Page-specific landing proportions keep longer headlines clear of the lower edge. */
+@media (min-width: 701px) {
+  .services-page-landing-copy {
+    width: min(68%, 920px);
+    padding-top: 126px;
+  }
+  .services-page-landing h1 {
+    font-size: clamp(2.5rem, 4.35vw, 4.65rem);
+  }
+  .learning-page-hero > div:last-child,
+  .workshops-hero > div:last-child {
+    width: min(68%, 850px);
+    padding-top: 126px;
+  }
+  .learning-page-hero h1,
+  .workshops-hero h1 {
+    font-size: clamp(2.5rem, 4.35vw, 4.75rem);
+  }
+  .compliance-hero {
+    min-height: 640px;
+    height: calc(60svh + 32px);
+  }
+  .compliance-hero > div:last-child {
+    padding-top: 146px;
+  }
+  .compliance-hero h1 {
+    font-size: clamp(2.5rem, 4.2vw, 4.5rem);
+  }
+  .compliance-hero > div:last-child > p:nth-of-type(2) {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .compliance-hero > div:last-child > a {
+    margin-top: 24px;
+    padding: 13px 19px;
+    font-size: 11px;
+  }
+}
+
+/* Every inner-page landing uses the same 70% viewport canvas; the Home hero stays independent. */
+@media (min-width: 701px) {
+  :is(
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero,
+    .course-detail-hero,
+    .service-detail-hero
+  ) {
+    min-height: 0;
+    height: 70svh;
+  }
+}
+@media (max-width: 700px) {
+  :is(
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero,
+    .course-detail-hero,
+    .service-detail-hero
+  ) {
+    min-height: 500px;
+    height: 70svh;
+  }
+}
+
+/* Page-specific landing proportions keep longer headlines clear of the lower edge. */
+@media (min-width: 701px) {
+  .services-page-landing-copy {
+    width: min(68%, 920px);
+    padding-top: 126px;
+  }
+  .services-page-landing h1 {
+    font-size: clamp(2.5rem, 4.35vw, 4.65rem);
+  }
+  .learning-page-hero > div:last-child,
+  .workshops-hero > div:last-child {
+    width: min(68%, 850px);
+    padding-top: 126px;
+  }
+  .learning-page-hero h1,
+  .workshops-hero h1 {
+    font-size: clamp(2.5rem, 4.35vw, 4.75rem);
+  }
+  .compliance-hero {
+    min-height: 640px;
+    height: calc(60svh + 32px);
+  }
+}
+
 /* Layered About media composition from the supplied reference */
 .about-reference .about-media {
   min-height: 575px;
@@ -1030,6 +1276,274 @@
   }
   .about-profile-card span {
     font-size: 9px;
+  }
+}
+
+/* Course detail pages inherit the research-service story layout. */
+.course-detail-workspace {
+  padding-top: 88px;
+}
+.course-detail-feature-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.76) contrast(1.04);
+}
+
+.inner-landing-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .68;
+  filter: saturate(.68) contrast(1.04);
+}
+
+/* Reusable visual pause based on the Services-page consultation strip. */
+.page-feature-strip {
+  position: relative;
+  display: flex;
+  min-height: 430px;
+  align-items: center;
+  margin: 132px 28px 154px;
+  overflow: visible;
+  color: #fff;
+  background: #063d3c;
+}
+.page-feature-strip::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -112px;
+  left: -42px;
+  width: 390px;
+  height: 132px;
+  background: repeating-radial-gradient(ellipse at 0 100%, transparent 0 8px, rgba(8, 83, 80, .15) 9px 10px);
+  transform: rotate(-8deg);
+}
+.page-feature-strip > video,
+.page-feature-strip-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.page-feature-strip > video {
+  object-fit: cover;
+  opacity: .5;
+  filter: saturate(.6) contrast(1.12);
+}
+.page-feature-strip-overlay {
+  background: linear-gradient(90deg, rgba(2, 55, 53, .92), rgba(2, 55, 53, .78) 43%, rgba(2, 55, 53, .56));
+}
+.page-feature-strip > img {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: clamp(20px, 9vw, 165px);
+  width: min(29vw, 365px);
+  height: 128%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 20px 18px rgba(0, 23, 22, .27));
+}
+.page-feature-strip-copy {
+  position: relative;
+  z-index: 3;
+  max-width: min(38vw, 560px);
+  margin-left: clamp(335px, 41vw, 680px);
+  margin-right: 190px;
+  padding: 52px 0;
+}
+.page-feature-strip-copy > p {
+  margin: 0 0 24px;
+  color: #c5e88f;
+  font: 800 10px/1.2 'DM Mono', monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.page-feature-strip-copy h2 {
+  margin: 0;
+  font-size: clamp(2.3rem, 4vw, 4.2rem);
+  font-weight: 500;
+  letter-spacing: -.075em;
+  line-height: .98;
+}
+.page-feature-strip-copy span {
+  display: block;
+  margin-top: 23px;
+  color: #c8ddd6;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.page-feature-strip > a {
+  position: absolute;
+  z-index: 4;
+  right: clamp(28px, 7vw, 118px);
+  display: grid;
+  width: 122px;
+  height: 122px;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  border-radius: 50%;
+  background: #c5e88f;
+  color: #0d3624;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  transition: transform .22s ease, background .22s ease;
+}
+.page-feature-strip > a:hover {
+  background: #d6f3a6;
+  transform: translateY(-5px);
+}
+@media (max-width: 960px) {
+  .page-feature-strip {
+    min-height: 460px;
+    margin: 110px 22px 132px;
+  }
+  .page-feature-strip > img {
+    left: 25px;
+    width: 270px;
+  }
+  .page-feature-strip-copy {
+    max-width: 430px;
+    margin-left: 290px;
+    margin-right: 165px;
+    padding: 52px 0;
+  }
+  .page-feature-strip > a {
+    right: 30px;
+    width: 96px;
+    height: 96px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 640px) {
+  .page-feature-strip {
+    display: block;
+    min-height: 590px;
+    margin: 0 0 72px;
+    overflow: hidden;
+    padding: 58px 24px 0;
+  }
+  .page-feature-strip-copy {
+    max-width: none;
+    max-width: calc(100% - 18px);
+    margin: 0;
+    padding: 0;
+  }
+  .page-feature-strip-copy h2 {
+    max-width: 370px;
+    font-size: clamp(2.35rem, 11vw, 3.35rem);
+  }
+  .page-feature-strip-copy span {
+    max-width: 340px;
+  }
+  .page-feature-strip > img {
+    right: -12px;
+    left: auto;
+    width: 235px;
+    height: 58%;
+  }
+  .page-feature-strip > a {
+    right: 21px;
+    bottom: 37px;
+    width: 98px;
+    height: 98px;
+  }
+}
+
+/* The About filmstrip becomes the lead-in to the principles section. */
+@media (min-width: 961px) {
+  .page-feature-strip.about-feature-strip {
+    margin: 132px 0 0;
+  }
+}
+@media (min-width: 641px) and (max-width: 960px) {
+  .page-feature-strip.about-feature-strip {
+    margin: 110px 0 0;
+  }
+}
+@media (max-width: 640px) {
+  .page-feature-strip.about-feature-strip {
+    margin: 0;
+  }
+}
+
+@media (min-width: 761px) {
+  .about-page-story {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+  }
+  .about-page-story > div {
+    order: 1;
+  }
+  .about-page-story > figure {
+    order: 2;
+  }
+}
+.about-page-story figure img {
+  object-position: center top;
+}
+.course-detail-modules > p:not(.service-detail-kicker) {
+  max-width: 590px;
+}
+.course-module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 29px;
+  border-top: 1px solid #d5e3de;
+  border-left: 1px solid #d5e3de;
+}
+.course-module-grid > article {
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  gap: 11px;
+  min-width: 0;
+  padding: 20px 17px 19px;
+  border-right: 1px solid #d5e3de;
+  border-bottom: 1px solid #d5e3de;
+}
+.course-module-grid > article > span {
+  color: #2d855e;
+  font: 700 10px 'DM Mono', monospace;
+}
+.course-module-grid h3 {
+  margin: 0 0 11px;
+  color: #0d3624;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: -.045em;
+}
+.course-module-grid ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.course-module-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: #587269;
+  font-size: 11px;
+  line-height: 1.55;
+}
+.course-module-grid li svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #1d754f;
+}
+@media (max-width: 720px) {
+  .course-detail-workspace {
+    padding-top: 61px;
+  }
+  .course-module-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2357,10 +2871,11 @@
   display: grid;
   grid-template-columns: minmax(0, 1.07fr) minmax(430px, 0.93fr);
   gap: clamp(48px, 8vw, 150px);
-  max-width: 1440px;
-  height: 955px;
+  width: 100%;
+  max-width: none;
+  height: 1100px;
   margin: 0 auto;
-  padding: 92px clamp(28px, 7vw, 126px) 108px;
+  padding: 92px max(28px, calc((100vw - 1440px) / 2 + 126px)) 108px;
   overflow: visible;
   color: #073d3c;
   background: #fff;
@@ -2485,6 +3000,8 @@
 }
 .services-faq-visual {
   position: relative;
+  align-self: start;
+  height: 635px;
   min-height: 635px;
   isolation: isolate;
 }
@@ -2696,12 +3213,13 @@
 }
 @media (max-width: 1024px) {
   .services-faq {
-    height: 880px;
+    height: 1012px;
     grid-template-columns: 1fr 0.9fr;
     gap: 44px;
     padding-inline: 44px;
   }
   .services-faq-visual {
+    height: 560px;
     min-height: 560px;
   }
   .services-faq-visual figure {
@@ -4821,4 +5339,717 @@
   .service-detail-image-cards img {
     height: 210px;
   }
+}
+
+/* Services-style landing shell for every inner route. */
+.about-page-hero,
+.learning-page-hero,
+.compliance-hero,
+.workshops-hero,
+.contact-hero,
+.course-detail-hero {
+  min-height: 430px;
+  height: 60svh;
+  margin: 24px 28px 0;
+  border-radius: 20px 20px 0 20px;
+}
+.about-page-hero-art {
+  z-index: 1;
+  right: clamp(24px, 9vw, 150px);
+  bottom: 0;
+  width: min(32vw, 390px);
+  height: 90%;
+  border-radius: 200px 200px 0 0;
+}
+.inner-landing-portrait {
+  position: absolute;
+  z-index: 1;
+  right: clamp(24px, 9vw, 150px);
+  bottom: 0;
+  width: min(32vw, 390px);
+  height: 90%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 24px 25px rgba(0, 19, 18, .27));
+}
+.about-page-hero-copy,
+.learning-page-hero > div:last-child,
+.compliance-hero > div:last-child,
+.workshops-hero > div:last-child,
+.contact-hero > div:last-child,
+.course-detail-copy {
+  width: min(56%, 690px);
+  max-width: none;
+  padding: clamp(60px, 9vh, 116px) 0 0 clamp(34px, 10vw, 158px);
+}
+.about-page-hero h1,
+.learning-page-hero h1,
+.compliance-hero h1,
+.workshops-hero h1,
+.contact-hero h1,
+.course-detail-copy h1 {
+  font-size: clamp(2.5rem, 5.2vw, 5.35rem);
+}
+.course-detail-copy {
+  position: relative;
+  z-index: 2;
+}
+.course-detail-meta {
+  right: clamp(24px, 5vw, 84px);
+  bottom: 28px;
+}
+.contact-hero > video,
+.contact-hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.contact-hero > video {
+  object-fit: cover;
+  opacity: .68;
+  filter: saturate(.68) contrast(1.04);
+}
+.contact-hero-overlay {
+  background: linear-gradient(90deg, rgba(0, 42, 41, .96) 3%, rgba(0, 53, 51, .76) 48%, rgba(0, 36, 35, .14));
+}
+.contact-hero::after {
+  display: none;
+}
+.about-page,
+.compliance-page,
+.workshops-page,
+.contact-page {
+  /* The centre consultation strip intentionally projects above its panel. */
+  overflow: visible;
+}
+.service-detail-hero {
+  min-height: 430px;
+  height: 60svh;
+}
+@media (max-width: 700px) {
+  .about-page-hero,
+  .learning-page-hero,
+  .compliance-hero,
+  .workshops-hero,
+  .contact-hero,
+  .course-detail-hero,
+  .service-detail-hero {
+    min-height: 550px;
+    height: 62svh;
+    margin: 0;
+    border-radius: 0;
+  }
+  .about-page-hero-art,
+  .inner-landing-portrait {
+    right: -8px;
+    width: 62vw;
+    height: 48%;
+  }
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child,
+  .course-detail-copy {
+    width: calc(100% - 40px);
+    padding: 118px 0 0 22px;
+  }
+  .course-detail-meta {
+    right: 22px;
+    bottom: 24px;
+  }
+}
+
+/* Keep the About portrait tall enough to retain the full head and upper body. */
+.about-page-story figure {
+  width: min(100%, 320px);
+  height: auto;
+  aspect-ratio: 9 / 16;
+  align-self: center;
+  justify-self: end;
+}
+.about-page-story figure img {
+  object-position: center top;
+}
+@media (max-width: 760px) {
+  .about-page-story figure {
+    width: min(100%, 320px);
+    margin-inline: auto;
+    justify-self: center;
+  }
+}
+
+/* Landing copy always begins below its navigation, at every desktop and tablet width. */
+@media (min-width: 701px) {
+  .services-page-landing-copy,
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child,
+  .course-detail-copy,
+  .service-detail-hero-copy {
+    padding-top: clamp(132px, 16svh, 164px);
+  }
+}
+
+@media (max-width: 700px) {
+  .services-page-landing-copy {
+    padding-top: 112px;
+  }
+}
+
+/* Shared landing motion: a calm camera drift, light lift, and directional CTA response. */
+:is(
+  .hero-reference,
+  .services-page-landing,
+  .about-page-hero,
+  .learning-page-hero,
+  .compliance-hero,
+  .workshops-hero,
+  .contact-hero,
+  .course-detail-hero,
+  .service-detail-hero
+) > video {
+  transition: transform 1.1s cubic-bezier(.2, .72, .2, 1), filter 1.1s ease;
+  will-change: transform;
+}
+
+:is(
+  .services-page-landing-copy,
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child,
+  .course-detail-copy,
+  .service-detail-hero-copy,
+  .hero-copy-reference
+) > :is(h1, p, a) {
+  animation: landing-copy-enter .68s cubic-bezier(.2, .78, .24, 1) both;
+}
+
+:is(
+  .services-page-landing-copy,
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child,
+  .course-detail-copy,
+  .service-detail-hero-copy,
+  .hero-copy-reference
+) > h1 {
+  animation-delay: .08s;
+}
+
+:is(
+  .services-page-landing-copy,
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child,
+  .course-detail-copy,
+  .service-detail-hero-copy,
+  .hero-copy-reference
+) > a {
+  animation-delay: .18s;
+}
+
+:is(
+  .inner-page-nav a,
+  .service-detail-header nav a,
+  .hero-reference .desktop-nav a
+) {
+  position: relative;
+}
+
+:is(
+  .inner-page-nav a,
+  .service-detail-header nav a,
+  .hero-reference .desktop-nav a
+)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  left: 0;
+  height: 1px;
+  background: #c5e88f;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(
+    .hero-reference,
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero,
+    .course-detail-hero,
+    .service-detail-hero
+  ):hover > video {
+    filter: saturate(.8) brightness(1.08);
+    transform: scale(1.045) translate3d(-.75%, 0, 0);
+  }
+  .hero-reference:hover > video.hero-background {
+    transform: scale(1.045) translate3d(-.75%, 0, 0);
+  }
+  :is(
+    .services-page-landing-copy,
+    .about-page-hero-copy,
+    .learning-page-hero > div:last-child,
+    .compliance-hero > div:last-child,
+    .workshops-hero > div:last-child,
+    .contact-hero > div:last-child,
+    .course-detail-copy,
+    .service-detail-hero-copy,
+    .hero-copy-reference
+  ) h1 {
+    transition: filter .45s ease, text-shadow .45s ease;
+  }
+  :is(
+    .hero-reference,
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero,
+    .course-detail-hero,
+    .service-detail-hero
+  ):hover :is(
+    .services-page-landing-copy,
+    .about-page-hero-copy,
+    .learning-page-hero > div:last-child,
+    .compliance-hero > div:last-child,
+    .workshops-hero > div:last-child,
+    .contact-hero > div:last-child,
+    .course-detail-copy,
+    .service-detail-hero-copy,
+    .hero-copy-reference
+  ) h1 {
+    filter: drop-shadow(0 9px 16px rgba(0, 17, 16, .22));
+  }
+  :is(
+    .services-page-landing-copy > a,
+    .learning-page-hero > div:last-child > a,
+    .compliance-hero > div:last-child > a,
+    .course-detail-copy > a,
+    .service-detail-primary,
+    .hero-copy-reference .lime-button
+  ) {
+    transition: box-shadow .32s ease, background-position .55s ease, transform .32s ease;
+    background-image: linear-gradient(105deg, #c5e88f 0%, #c5e88f 42%, #e9fac7 50%, #c5e88f 58%, #c5e88f 100%);
+    background-size: 230% 100%;
+    background-position: 100% 0;
+  }
+  :is(
+    .services-page-landing-copy > a,
+    .learning-page-hero > div:last-child > a,
+    .compliance-hero > div:last-child > a,
+    .course-detail-copy > a,
+    .service-detail-primary,
+    .hero-copy-reference .lime-button
+  ):hover {
+    box-shadow: 0 13px 25px rgba(0, 24, 22, .23);
+    background-position: 0 0;
+    transform: translateY(-2px);
+  }
+  :is(
+    .services-page-landing-copy > a,
+    .learning-page-hero > div:last-child > a,
+    .compliance-hero > div:last-child > a,
+    .course-detail-copy > a,
+    .service-detail-primary,
+    .hero-copy-reference .lime-button
+  ) svg {
+    transition: transform .32s cubic-bezier(.2, .9, .25, 1);
+  }
+  :is(
+    .services-page-landing-copy > a,
+    .learning-page-hero > div:last-child > a,
+    .compliance-hero > div:last-child > a,
+    .course-detail-copy > a,
+    .service-detail-primary,
+    .hero-copy-reference .lime-button
+  ):hover svg {
+    transform: translateX(5px) rotate(-12deg);
+  }
+  :is(
+    .inner-page-nav a,
+    .service-detail-header nav a,
+    .hero-reference .desktop-nav a
+  ):hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes landing-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(
+    .hero-reference,
+    .services-page-landing,
+    .about-page-hero,
+    .learning-page-hero,
+    .compliance-hero,
+    .workshops-hero,
+    .contact-hero,
+    .course-detail-hero,
+    .service-detail-hero
+  ) > video,
+  :is(
+    .services-page-landing-copy,
+    .about-page-hero-copy,
+    .learning-page-hero > div:last-child,
+    .compliance-hero > div:last-child,
+    .workshops-hero > div:last-child,
+    .contact-hero > div:last-child,
+    .course-detail-copy,
+    .service-detail-hero-copy,
+    .hero-copy-reference
+  ) > :is(h1, p, a) {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Learning directory: landscape course cards keep the programme footage true to colour. */
+.learning-page .course-directory{padding:clamp(72px,8vw,112px) max(22px,calc((100vw - 1120px)/2)) clamp(80px,9vw,124px);background:#f8fcfb}
+.learning-page .course-directory-heading{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(230px,.55fr);gap:clamp(28px,6vw,78px);align-items:end;margin:0 0 clamp(38px,5vw,60px);padding-bottom:clamp(24px,3vw,36px);border-bottom:3px solid #f05429}
+.learning-page .course-directory-heading .orange-kicker{display:flex;align-items:center;gap:11px;margin:0 0 24px;color:#f05429;font:700 10px/1.2 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase}.learning-page .course-directory-heading .orange-kicker b{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#f05429;color:#fff;font-size:14px;line-height:1}
+.learning-page .course-directory-heading h2{max-width:760px;margin:0;color:#073d3c;font-size:clamp(2.45rem,4.7vw,5rem);line-height:.98;letter-spacing:-.075em}.learning-page .course-directory-heading h2 strong{color:#0b6c57;font-weight:800}.learning-page .course-directory-heading>p:last-child{max-width:340px;margin:0 0 3px;color:#587269;font-size:1rem;line-height:1.7}
+.learning-page .course-directory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.learning-page .course-directory-grid article{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);min-height:310px;overflow:hidden;border:1px solid #d9e6df;border-radius:14px;background:#fff;color:#0d3624;box-shadow:0 14px 30px rgba(12,58,47,.07);transition:transform .3s ease,box-shadow .3s ease}.learning-page .course-directory-grid article:hover{transform:translateY(-5px);box-shadow:0 22px 42px rgba(12,58,47,.13)}
+.learning-page .course-card-media{position:relative;min-height:100%;overflow:hidden;background:#173d37}.learning-page .course-card-media video{display:block;width:100%;height:100%;object-fit:cover;opacity:1;filter:none;transform:scale(1.002);transition:transform .6s ease}.learning-page .course-directory-grid article:hover .course-card-media video{transform:scale(1.045)}.learning-page .course-card-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 70%,rgba(5,43,35,.13))}
+.learning-page .course-directory-grid .course-card-content{position:relative;z-index:1;display:flex;min-height:0;flex-direction:column;justify-content:center;padding:clamp(22px,2.5vw,31px);background:#fff}.learning-page .course-directory-grid .course-card-content:before{content:'';width:34px;height:3px;margin-bottom:18px;background:#f05429}.learning-page .course-directory-grid article>div>span{color:#16805e;font:700 10px/1.25 'DM Mono',monospace;letter-spacing:.08em}.learning-page .course-directory-grid h3{margin:12px 0 10px;color:#073d3c;font-size:clamp(1.25rem,1.7vw,1.55rem);line-height:1.12;letter-spacing:-.05em}.learning-page .course-directory-grid p{margin:0;color:#557069;font-size:.81rem;line-height:1.62}.learning-page .course-directory-meta{gap:10px;margin-top:18px;color:#41655a;font-size:.7rem}.learning-page .course-directory-meta span{gap:4px}.learning-page .course-directory-meta svg{width:13px;height:13px;color:#16805e}.learning-page .course-directory-grid article a{margin-top:17px;color:#0b6c57;font-size:.75rem}.learning-page .course-directory-grid article a svg{transition:transform .25s ease}.learning-page .course-directory-grid article:hover a svg{transform:translateX(4px)}
+.learning-page .page-cta{min-height:340px;padding:clamp(54px,6vw,76px) max(22px,calc((100vw - 1120px)/2));background:linear-gradient(118deg,#0b3025,#15523d)}.learning-page .page-cta h2{max-width:650px;font-size:clamp(2.35rem,4.2vw,4.5rem);margin-bottom:23px}.learning-page .page-cta:after{right:-.02em;bottom:-.02em;color:rgba(197,232,143,.12);font-size:clamp(14rem,26vw,24rem);line-height:.78;animation:learning-rn-drift 11s ease-in-out infinite alternate;will-change:transform}.learning-page .page-cta>*{position:relative;z-index:1}@keyframes learning-rn-drift{from{transform:translate3d(0,0,0) rotate(0)}to{transform:translate3d(-2.25%, -3%, 0) rotate(-1deg)}}
+@media (max-width:980px){.learning-page .course-directory-heading{grid-template-columns:1fr;gap:20px}.learning-page .course-directory-heading>p:last-child{max-width:540px}.learning-page .course-directory-grid{grid-template-columns:1fr}.learning-page .course-directory-grid article{grid-template-columns:minmax(280px,.85fr) minmax(0,1.15fr);min-height:285px}}
+@media (max-width:700px){.learning-page .course-directory{padding:66px 22px 76px}.learning-page .course-directory-heading{gap:18px;margin-bottom:32px;padding-bottom:24px}.learning-page .course-directory-heading .orange-kicker{margin-bottom:18px}.learning-page .course-directory-heading h2{font-size:clamp(2.35rem,10vw,3.65rem);line-height:1.01}.learning-page .course-directory-heading>p:last-child{font-size:.94rem;line-height:1.65}.learning-page .course-directory-grid{gap:18px}.learning-page .course-directory-grid article{grid-template-columns:1fr;min-height:0}.learning-page .course-card-media{min-height:clamp(190px,53vw,285px)}.learning-page .course-card-media:after{background:linear-gradient(180deg,transparent 65%,rgba(5,43,35,.18))}.learning-page .course-directory-grid .course-card-content{padding:23px 21px 25px}.learning-page .course-directory-grid .course-card-content:before{margin-bottom:14px}.learning-page .course-directory-grid h3{font-size:1.35rem}.learning-page .course-directory-grid p{font-size:.84rem}.learning-page .course-directory-meta{margin-top:16px}.learning-page .page-cta{min-height:360px;padding:56px 22px 62px}.learning-page .page-cta h2{max-width:92%;font-size:clamp(2.25rem,9.7vw,3.25rem)}.learning-page .page-cta:after{right:-.08em;bottom:-.01em;font-size:clamp(13rem,57vw,19rem)}}
+@media (prefers-reduced-motion:reduce){.learning-page .page-cta:after{animation:none}.learning-page .course-card-media video,.learning-page .course-directory-grid article a svg{transition:none}}
+
+/* Shared inner-landing viewport safety rules — applied after all page overrides. */
+:is(.services-page-landing,.about-page-hero,.learning-page-hero,.compliance-hero,.workshops-hero,.contact-hero){min-height:max(70svh,600px);height:auto;margin:clamp(18px,2vw,30px) clamp(18px,2vw,30px) 0}
+:is(.services-page-landing-copy,.about-page-hero-copy,.learning-page-hero>div:last-child,.compliance-hero>div:last-child,.workshops-hero>div:last-child,.contact-hero>div:last-child){width:min(60%,690px);max-width:calc(100% - 48px);padding:clamp(118px,15svh,150px) 0 48px clamp(28px,8vw,128px)}
+:is(.services-page-landing h1,.about-page-hero h1,.learning-page-hero h1,.compliance-hero h1,.workshops-hero h1,.contact-hero h1){max-width:100%;font-size:clamp(2.55rem,4.5vw,4.75rem);line-height:1;overflow-wrap:anywhere;text-wrap:balance}
+:is(.services-page-landing-copy>p:nth-of-type(2),.about-page-hero-copy>p:last-child,.learning-page-hero>div:last-child>p:nth-of-type(2),.compliance-hero>div:last-child>p:nth-of-type(2),.workshops-hero>div:last-child>p:nth-of-type(2),.contact-hero>div:last-child>p:nth-of-type(2)){max-width:34rem;overflow-wrap:anywhere}
+:is(.services-page-landing-copy>a,.learning-page-hero>div:last-child>a,.compliance-hero>div:last-child>a){max-width:100%;white-space:normal}
+@media (max-width:1024px) and (min-width:701px){:is(.services-page-landing-copy,.about-page-hero-copy,.learning-page-hero>div:last-child,.compliance-hero>div:last-child,.workshops-hero>div:last-child,.contact-hero>div:last-child){width:min(76%,640px);padding-left:clamp(28px,7vw,72px)}}
+@media (max-width:700px){:is(.services-page-landing,.about-page-hero,.learning-page-hero,.compliance-hero,.workshops-hero,.contact-hero){min-height:620px;height:auto;margin:0;border-radius:0}:is(.services-page-landing-copy,.about-page-hero-copy,.learning-page-hero>div:last-child,.compliance-hero>div:last-child,.workshops-hero>div:last-child,.contact-hero>div:last-child){width:100%;max-width:none;padding:104px 22px 48px}:is(.services-page-landing h1,.about-page-hero h1,.learning-page-hero h1,.compliance-hero h1,.workshops-hero h1,.contact-hero h1){font-size:clamp(2.55rem,11vw,3.9rem);line-height:1.03}:is(.services-page-landing-copy>p:nth-of-type(2),.about-page-hero-copy>p:last-child,.learning-page-hero>div:last-child>p:nth-of-type(2),.compliance-hero>div:last-child>p:nth-of-type(2),.workshops-hero>div:last-child>p:nth-of-type(2),.contact-hero>div:last-child>p:nth-of-type(2)){font-size:.9rem;line-height:1.65}}
+@media (max-width:380px){:is(.services-page-landing,.about-page-hero,.learning-page-hero,.compliance-hero,.workshops-hero,.contact-hero){min-height:640px}}
+
+/* Course footage stays in a full-width 16:9 landscape frame at every breakpoint. */
+.learning-page .course-directory-grid article{grid-template-columns:1fr;min-height:0}.learning-page .course-card-media{min-height:0;aspect-ratio:16/9}.learning-page .course-card-media video{width:100%;height:100%;object-fit:cover;object-position:center}.learning-page .course-card-media:after{background:linear-gradient(180deg,transparent 72%,rgba(5,43,35,.12))}.learning-page .course-directory-grid .course-card-content{min-height:255px;padding:clamp(24px,3vw,32px)}
+@media (max-width:980px){.learning-page .course-directory-grid article{grid-template-columns:1fr;min-height:0}.learning-page .course-card-media{min-height:0;aspect-ratio:16/9}}
+@media (max-width:700px){.learning-page .course-card-media{min-height:0;aspect-ratio:16/9}.learning-page .course-directory-grid .course-card-content{min-height:0;padding:23px 21px 25px}}
+
+/* Supplied Rajesh Nivesh brandmark in the navigation and footer. */
+.inner-page-header{min-height:118px}.inner-page-brand{width:104px;height:108px}.inner-page-brand img{width:104px;height:104px;object-fit:contain;object-position:center}.service-detail-header{height:118px}.service-detail-brand{width:104px;height:108px;overflow:visible}.service-detail-brand img{width:104px;height:104px;object-fit:contain;object-position:center;transform:none;filter:none}.reference-page .site-header{height:118px}.reference-page .brand{width:104px;height:108px}.reference-page .brand img{width:104px;height:104px;object-fit:contain;object-position:center;transform:none;border-radius:0;filter:none}.reference-page .brand .brand-name,.footer .brand .brand-name{display:none}.footer .brand{display:block;width:200px;height:200px;margin:0 0 28px}.footer .brand img{display:block;width:200px;height:200px;object-fit:contain;object-position:center}
+@media(max-width:760px){.inner-page-header{min-height:88px}.inner-page-brand{width:80px;height:84px}.inner-page-brand img{width:80px;height:80px}.reference-page .site-header{height:88px}.reference-page .brand{width:80px;height:84px}.reference-page .brand img{width:80px;height:80px}.service-detail-header{height:88px}.service-detail-brand{width:80px;height:84px}.service-detail-brand img{width:80px;height:80px}.footer .brand{width:150px;height:150px;margin-bottom:22px}.footer .brand img{width:150px;height:150px}}
+
+/* Home landing: video and green overlay share one clipped, stable surface. */
+.hero-reference{overflow:hidden;isolation:isolate}.hero-reference:before,.hero-reference>video.hero-background{inset:0;width:100%;height:100%;border-radius:inherit}.hero-reference>video.hero-background{transform:none;filter:saturate(.7) brightness(.92)}
+@media (hover:hover) and (pointer:fine){.hero-reference:hover>video.hero-background{transform:none;filter:saturate(.7) brightness(.92)}.hero-reference .hero-copy-reference h1,.hero-reference .hero-copy-reference p{transition:transform .32s ease,filter .32s ease}.hero-reference:hover .hero-copy-reference h1{transform:translateY(-3px);filter:drop-shadow(0 10px 16px rgba(0,17,16,.25))}.hero-reference:hover .hero-copy-reference p{transform:translateY(-1px)}}
+
+/* Learning cards: no outline, full-frame video, and vertically balanced mobile hero copy. */
+.learning-page .course-directory-grid article{border:0;border-radius:14px;box-shadow:0 14px 30px rgba(12,58,47,.07)}.learning-page .course-card-media{background:#0d3d31}.learning-page .course-card-media video{object-fit:contain;object-position:center;transform:none!important}.learning-page .course-directory-grid article:hover .course-card-media video{transform:none!important}
+@media (max-width:700px){.learning-page-hero{display:flex}.learning-page-hero>div:last-child{display:flex;flex:1;flex-direction:column;justify-content:center;padding:96px 22px 72px}.learning-page .course-directory-grid article{border-radius:0;box-shadow:0 10px 24px rgba(12,58,47,.08)}.learning-page .course-card-media{aspect-ratio:16/9;background:#0d3d31}.learning-page .course-card-media video{object-fit:contain}}
+
+/* Compliance: match the home complaint boards and use one clear mint support strip. */
+.compliance-page .compliance-board-section{padding:clamp(76px,8vw,108px) max(22px,calc((100vw - 1120px)/2));background:#effafa}.compliance-page .compliance-board-heading{max-width:720px;display:block;margin:0 auto 47px;text-align:center}.compliance-page .compliance-board-heading .detail-kicker{justify-content:center;margin-bottom:18px}.compliance-page .compliance-board-heading h2{margin:0;color:#0d3624;font-size:clamp(2.45rem,4.2vw,4.55rem);line-height:1;letter-spacing:-.07em}.compliance-page .compliance-board-heading h2 em{color:#174e34;font-family:inherit;font-style:normal;font-weight:800}.compliance-page .compliance-board-heading>p:last-child{max-width:610px;margin:20px auto 0;color:#58736b;font-size:15px;line-height:1.65}.compliance-page .complaint-board{overflow:hidden;border:1px solid #c8dfd9;border-radius:17px;background:#fff;box-shadow:0 15px 36px rgba(13,54,36,.08)}.compliance-page .complaint-board-title{align-items:center;min-height:77px;padding:16px 24px;border:0;background:#0d3624;color:#fff}.compliance-page .complaint-board-title>div{display:grid;gap:5px}.compliance-page .complaint-board-title b{font-size:16px;letter-spacing:-.025em}.compliance-page .complaint-board-title span{margin:0;color:#b8d873;font-size:11px;font-weight:800;letter-spacing:.08em;line-height:1.2;text-transform:uppercase}.compliance-page .complaint-board-title>p{display:grid;gap:3px;margin:0;color:#cce1dc;font-size:11px;text-align:right}.compliance-page .complaint-board-title>p strong{color:#fff;font-size:13px}.compliance-page .complaint-table{min-width:970px;font-size:13px;text-align:center}.compliance-page .complaint-table th,.compliance-page .complaint-table td{padding:13px 10px;border-right:1px solid rgba(13,54,36,.12);border-bottom:1px solid rgba(13,54,36,.12);text-align:center}.compliance-page .complaint-table th:nth-child(2),.compliance-page .complaint-table td:nth-child(2){min-width:0;text-align:center}.compliance-page .complaint-table thead th{background:#f2f8ec;color:#174e34;font-size:11px;font-weight:800;line-height:1.25;text-transform:uppercase}.compliance-page .complaint-table tbody tr:nth-child(even){background:#fbfdf9}.compliance-page .complaint-table tbody td{color:#59716f}.compliance-page .complaint-table tbody td:nth-child(2){color:#274b41}.compliance-page .complaint-zero{width:31px;height:31px;background:#f1f7ec;color:#66817a}.compliance-page .complaint-total{width:34px;height:34px;background:#174e34;color:#fff}.compliance-page .complaint-table tfoot{background:#edf2ef;color:#174e34;font-weight:800}.compliance-page .complaint-board-notes{align-items:end;padding:16px 24px;background:#f5faf1;color:#6c837c;font-size:11px;line-height:1.5}.compliance-page .complaint-board-notes>p{margin:0;text-align:right;color:#55736b}.compliance-page .complaint-key{display:flex;flex-wrap:wrap;gap:12px 29px;margin:18px 0 37px;padding:17px 20px;border:1px solid #d0e1d9;border-radius:13px;background:#f5faf1;color:#687f78;font-size:11px;line-height:1.45}.compliance-page .complaint-key b{color:#174e34}.compliance-page .complaint-key span:last-child{margin-left:auto}.compliance-page .complaint-key u{color:#174e34;text-underline-offset:3px}.compliance-page .complaint-trend-board .complaint-board-title{min-height:62px}.compliance-page .complaint-trend-board .complaint-board-title>div{display:flex;align-items:center;gap:13px}.compliance-page .complaint-trend-board .complaint-table{min-width:750px}.compliance-page .complaint-trend-board .complaint-table tbody td{padding-top:8px;padding-bottom:8px}.compliance-page .complaint-trend-board .complaint-table tfoot th,.compliance-page .complaint-trend-board .complaint-table tfoot td{padding-top:10px;padding-bottom:10px}
+.compliance-mint-strip{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(20px,3vw,38px);padding:clamp(34px,4vw,52px) max(22px,calc((100vw - 1120px)/2));overflow:hidden;background:#c5e88f;color:#0d3624}.compliance-mint-strip:before{content:'';position:absolute;right:-80px;top:-135px;width:280px;height:280px;border:58px solid rgba(13,54,36,.07);border-radius:50%;pointer-events:none}.compliance-mint-strip>*{position:relative;z-index:1}.compliance-mint-strip>svg{width:54px;height:54px;padding:14px;border-radius:50%;background:#0d3624;color:#c5e88f}.compliance-mint-strip p{margin:0 0 8px;color:#275d46;font:800 10px/1.2 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase}.compliance-mint-strip h2{margin:0;color:#0d3624;font-size:clamp(1.7rem,2.7vw,2.7rem);line-height:1.03;letter-spacing:-.06em}.compliance-mint-strip span{display:block;max-width:690px;margin-top:10px;color:#315b48;font-size:13px;line-height:1.65}.compliance-mint-strip a{display:inline-flex;align-items:center;gap:10px;justify-self:end;white-space:nowrap;padding:15px 20px;border-radius:999px;background:#0d3624;color:#fff;font-size:11px;font-weight:800;transition:transform .25s ease,box-shadow .25s ease}.compliance-mint-strip a:hover{box-shadow:0 12px 21px rgba(13,54,36,.22);transform:translateY(-2px)}
+@media (max-width:700px){.compliance-page .compliance-board-section{padding:72px 16px 78px}.compliance-page .compliance-board-heading{margin-bottom:33px}.compliance-page .compliance-board-heading h2{font-size:2.5rem}.compliance-page .compliance-board-heading>p:last-child{font-size:13px}.compliance-page .complaint-board{border-radius:12px}.compliance-page .complaint-board-title{align-items:flex-start;flex-direction:column;min-height:0;gap:11px;padding:17px 18px}.compliance-page .complaint-board-title b{font-size:14px}.compliance-page .complaint-board-title>p{text-align:left}.compliance-page .complaint-table{font-size:12px}.compliance-page .complaint-table th,.compliance-page .complaint-table td{padding:11px 9px}.compliance-page .complaint-board-notes{align-items:flex-start;flex-direction:column;gap:12px;padding:14px 18px}.compliance-page .complaint-board-notes>p{text-align:left}.compliance-page .complaint-key{gap:8px;margin:14px 0 28px;padding:14px}.compliance-page .complaint-key span:last-child{width:100%;margin-left:0}.compliance-page .complaint-trend-board .complaint-board-title>div{align-items:flex-start;flex-direction:column;gap:5px}.compliance-mint-strip{grid-template-columns:auto 1fr;padding:32px 22px;gap:17px}.compliance-mint-strip>svg{width:46px;height:46px;padding:12px}.compliance-mint-strip h2{font-size:clamp(1.65rem,7.5vw,2.3rem)}.compliance-mint-strip span{font-size:12px}.compliance-mint-strip a{grid-column:1/-1;justify-self:start;margin-top:2px}}
+
+/* Complaint values stay as clear, plain numerals rather than decorative badges. */
+.complaint-zero,.complaint-total{display:inline;color:#174e34;background:transparent;border-radius:0;font:700 13px/1 'DM Mono',monospace}.complaint-total{color:#174e34}
+
+/* Let the pale compliance canvas show around the inset landing, and keep data values unstyled and legible. */
+.compliance-page{background:#effafa}.compliance-page .complaint-zero,.compliance-page .complaint-total{display:inline-block;width:auto;height:auto;min-width:1em;padding:0;border-radius:0;background:transparent;color:#174e34;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;line-height:1}
+
+/* Home: the research-film landing finishes before the separate RN experience panel. */
+.reference-page .hero-reference{min-height:max(70svh,640px);margin-bottom:0}.reference-page .experience-card{position:relative;right:auto;bottom:auto;z-index:1;display:flex;align-items:center;width:100%;height:clamp(190px,18vw,270px);margin:0;padding:clamp(34px,4vw,58px) max(28px,calc((100vw - 1180px)/2));overflow:hidden;border:0;border-radius:0;background:#073d3c;color:#fff}.reference-page .experience-card:before{right:-50px;bottom:-70px;width:380px;height:230px;background:repeating-radial-gradient(ellipse at 100% 100%,transparent 0 8px,rgba(181,224,220,.18) 9px 10px);transform:rotate(-8deg)}.reference-page .experience-card>div{position:relative;z-index:2}.reference-page .experience-card strong{font-size:clamp(3.2rem,5vw,5.1rem)}.reference-page .experience-card p{margin:15px 0 0;font-size:clamp(.9rem,1.15vw,1.1rem)}.reference-page .experience-rn{position:absolute;z-index:0;right:clamp(22px,8vw,150px);bottom:-.25em;color:rgba(197,232,143,.1);font-family:Georgia,'Times New Roman',serif;font-size:clamp(13rem,30vw,30rem);font-weight:700;line-height:.7;letter-spacing:-.17em;pointer-events:none;user-select:none}
+@media (max-width:1024px){.reference-page .hero-reference{min-height:650px}.reference-page .experience-card{height:210px;padding-inline:clamp(28px,8vw,78px)}.reference-page .experience-rn{right:8vw;font-size:clamp(12rem,34vw,22rem)}}
+@media (max-width:700px){.reference-page .hero-reference{min-height:640px;height:auto;margin:0;overflow:hidden;border-radius:0}.reference-page .experience-card{height:208px;padding:37px 48px}.reference-page .experience-card:before{right:-48px;bottom:-55px;width:310px;height:190px}.reference-page .experience-card strong{font-size:62px}.reference-page .experience-card p{margin-top:12px;font-size:15px}.reference-page .experience-rn{right:27px;bottom:-.11em;font-size:clamp(11rem,54vw,15rem)}}
+@media (max-width:380px){.reference-page .hero-reference{min-height:650px}.reference-page .experience-card{height:198px;padding:33px 31px}.reference-page .experience-rn{right:19px;font-size:10.5rem}}
+
+/* The Home film continues behind its mobile navigation, as on the About landing. */
+@media (max-width:700px){.reference-page .hero-reference .site-header{background:transparent;color:#fff;border-bottom:1px solid rgba(255,255,255,.16)}.reference-page .hero-reference .menu-button{border-color:rgba(255,255,255,.9);color:#fff}.reference-page .hero-reference .mobile-nav{top:65px}}
+
+/* Home learning guidance: keep Rajesh visible on phones instead of leaving a blank portrait panel. */
+@media (max-width:650px){.market-guidance .guidance-portrait,.market-guidance.is-visible .guidance-portrait{position:relative;display:block;order:2;height:min(130vw,500px);min-height:420px;margin:0 -22px;overflow:hidden;clip-path:none!important;background:linear-gradient(145deg,#dceeed,#effafa 58%,#d2e7e4);animation:none!important;opacity:1!important}.market-guidance .guidance-portrait:after{right:8%;left:8%;background:rgba(7,61,60,.14)}.market-guidance .guidance-portrait img,.market-guidance.is-visible .guidance-portrait img{position:absolute;z-index:1;bottom:0;left:50%;display:block;width:auto!important;max-width:none;height:100%!important;object-fit:contain;object-position:center bottom;transform:translateX(-50%)!important;animation:none!important;opacity:1!important;visibility:visible!important;filter:drop-shadow(0 16px 19px rgba(5,54,51,.18))}}
+
+/* A compact, polished navigation drawer for the Home hero on phones. */
+@media (max-width:700px){.reference-page .hero-reference .site-header{padding-inline:18px;backdrop-filter:blur(7px);background:linear-gradient(180deg,rgba(0,45,43,.36),rgba(0,45,43,.05))}.reference-page .hero-reference .menu-button{width:46px;height:46px;border:1px solid rgba(255,255,255,.75);background:rgba(2,49,47,.26);box-shadow:0 8px 18px rgba(0,18,17,.18);transition:transform .22s ease,background .22s ease}.reference-page .hero-reference .menu-button:active{background:rgba(197,232,143,.22);transform:scale(.94)}.reference-page .hero-reference .mobile-nav{top:calc(100% + 10px);left:14px;right:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:13px;border:1px solid rgba(207,235,223,.22);border-radius:0 0 18px 18px;background:rgba(4,59,56,.95);box-shadow:0 20px 38px rgba(0,21,20,.3);backdrop-filter:blur(18px)}.reference-page .hero-reference .mobile-nav a{display:flex;align-items:center;min-height:43px;padding:10px 12px;border:1px solid rgba(220,245,234,.13);border-radius:10px;color:#f5fbf8;font-size:12px;font-weight:800;transition:background .2s ease,color .2s ease}.reference-page .hero-reference .mobile-nav a:active{background:#c5e88f;color:#073d3c}}
+
+/* Workshops: retain the feature panel but run it full width into the blue follow-up section. */
+.workshops-page .page-feature-strip{width:100%;margin:132px 0 0}.workshops-page .workshop-expect{margin-top:0}
+@media (max-width:640px){.workshops-page .page-feature-strip{margin:0}.workshops-page .workshop-expect{margin-top:0}}
+
+/* One global mobile navigation sheet across Home, inner pages and detail pages. */
+@media (max-width:900px){:is(.inner-page-mobile-nav,.reference-page .hero-reference .mobile-nav){position:fixed!important;z-index:100;top:0!important;right:0!important;left:0!important;display:block!important;width:100%;height:80svh;margin:0!important;padding:98px 22px 28px!important;overflow:hidden;border:0!important;border-radius:0 0 24px 24px!important;background:#073d3c!important;box-shadow:0 22px 42px rgba(0,22,21,.34);isolation:isolate}.mobile-menu-brand{position:absolute;z-index:2;top:20px;left:22px;display:block;width:82px;height:72px}.mobile-menu-brand img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.mobile-menu-rn{position:absolute;z-index:-1;right:-.1em;bottom:-.27em;color:rgba(197,232,143,.1);font:700 clamp(13rem,52vw,22rem)/.7 Georgia,'Times New Roman',serif;letter-spacing:-.2em;pointer-events:none;user-select:none}.mobile-menu-links{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.mobile-menu-links a{display:flex;align-items:center;min-height:48px;padding:12px 14px;border:1px solid rgba(226,247,237,.16);border-radius:11px;background:rgba(255,255,255,.035);color:#f7fcf8;font-size:12px;font-weight:800;transition:background .2s ease,color .2s ease,transform .2s ease}.mobile-menu-links a[aria-current='page']{border-color:#c5e88f;background:#c5e88f;color:#073d3c}.mobile-menu-links a:active{background:#c5e88f;color:#073d3c;transform:scale(.97)}:is(.inner-page-menu,.reference-page .hero-reference .menu-button){position:relative;z-index:101}.reference-page .hero-reference .mobile-nav{backdrop-filter:none}.reference-page .hero-reference .mobile-nav>a:not(.mobile-menu-brand){display:none}}
+@media (max-width:380px){:is(.inner-page-mobile-nav,.reference-page .hero-reference .mobile-nav){padding:89px 16px 22px!important}.mobile-menu-brand{top:16px;left:16px;width:74px;height:66px}.mobile-menu-links{gap:8px}.mobile-menu-links a{min-height:44px;padding:10px 11px;font-size:11px}}
+
+@media (max-width:900px){:is(.inner-page-mobile-nav,.reference-page .hero-reference .mobile-nav) .mobile-menu-brand{position:absolute;z-index:2;top:20px;left:22px;display:block;width:82px;height:72px;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important}:is(.inner-page-mobile-nav,.reference-page .hero-reference .mobile-nav) .mobile-menu-links a{display:flex;align-items:center;min-height:48px;padding:12px 14px;border:1px solid rgba(226,247,237,.16);border-radius:11px;background:rgba(255,255,255,.035);color:#f7fcf8;font-size:12px;font-weight:800}:is(.inner-page-mobile-nav,.reference-page .hero-reference .mobile-nav) .mobile-menu-links a[aria-current='page']{border-color:#c5e88f;background:#c5e88f;color:#073d3c}}
+
+/* Desktop and tablet Home use 95% of the first viewport for the landing composition. */
+@media (min-width:701px){.reference-page .hero-reference{height:95svh;min-height:0;margin:29px 29px 0}.reference-page .experience-card{height:clamp(214px,18vw,270px)}}
+
+/* Desktop/tablet return to the original compact experience box inside the landing. */
+@media (min-width:701px){.reference-page .experience-card-mobile{display:none}.reference-page .hero-reference .experience-card-desktop{position:absolute;z-index:4;right:-1px;bottom:-1px;display:block;width:332px;height:214px;margin:0;padding:36px 39px;overflow:hidden;border:30px solid #effafa;border-radius:21px 0 0 0;background:#063d3c;color:#fff}.reference-page .hero-reference .experience-card-desktop:before{right:-38px;bottom:-65px;width:285px;height:160px;background:repeating-radial-gradient(ellipse at 100% 100%,transparent 0 8px,rgba(181,224,220,.19) 9px 10px);transform:rotate(-8deg)}.reference-page .hero-reference .experience-card-desktop>div{position:relative;z-index:2}.reference-page .hero-reference .experience-card-desktop strong{font-size:62px}.reference-page .hero-reference .experience-card-desktop p{margin:17px 0 0;font-size:15px}.reference-page .hero-reference .experience-card-desktop img{position:absolute;z-index:1;right:-21px;bottom:-1px;display:block;width:138px;height:177px;object-fit:cover;object-position:50%;border-radius:70px 70px 0 0;filter:saturate(.8)}}
+@media (max-width:700px){.experience-card-desktop{display:none}}
+
+/* Keep the inset Home landing surrounded by the same pale-blue canvas on every side. */
+.reference-page{display:flow-root}
+
+/* Give the Home About-card portrait a slightly closer, more confident crop. */
+.about-reference .happy-card img{right:-31px;width:112%;height:270px}
+@media (max-width:1024px){.about-reference .happy-card img{right:-28px;height:232px}}
+@media (max-width:700px){.about-reference .happy-card img{right:-27px;height:204px}}
+
+/* Desktop experience card reaches the hero edge, with the portrait kept fully in frame. */
+@media (min-width:701px){.reference-page .hero-reference .experience-card-desktop{right:0;bottom:0;width:clamp(350px,22vw,430px);height:clamp(225px,17vw,290px);padding:clamp(30px,2.4vw,42px);border:0;border-top:30px solid #effafa;border-left:30px solid #effafa;border-radius:21px 0 0 0}.reference-page .hero-reference .experience-card-desktop img{right:0;bottom:0;width:48%;height:100%;object-fit:contain;object-position:center bottom;border-radius:0;filter:saturate(.86)}}
+
+/* Phone layouts can report widths above 700px; keep Home in its mobile composition through 760px. */
+@media (max-width:760px){.reference-page .hero-reference{height:auto;min-height:640px;margin:0;overflow:hidden;border-radius:0}.reference-page .hero-reference .experience-card-desktop{display:none!important}.reference-page .experience-card-mobile{display:flex;height:208px;padding:37px 48px}.reference-page .hero-person{display:none}.reference-page .hero-reference .site-header{height:72px;padding:0 18px;background:linear-gradient(180deg,rgba(0,45,43,.38),rgba(0,45,43,.05));border-bottom:1px solid rgba(255,255,255,.16);color:#fff}.reference-page .hero-reference .desktop-nav,.reference-page .hero-actions{display:none}.reference-page .hero-reference .menu-button{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.82);border-radius:50%;background:rgba(2,49,47,.26);color:#fff}.reference-page .hero-copy-reference{top:121px;left:18px;width:calc(100% - 36px);transform:none}.reference-page .hero-copy-reference h1{font-size:clamp(2.45rem,10vw,3.1rem);line-height:1.08}.reference-page .hero-copy-reference p{max-width:390px;margin:72px 0 34px;font-size:13px}.reference-page .hero-copy-reference p b{font-size:26px}.reference-page .lime-button{padding:15px 32px}.reference-page .slider-arrow,.reference-page .hero-scroll{display:none}}
+
+/* Use the Compliance hero overlay consistently across every primary landing. */
+.hero-reference::before,
+.about-page-hero::after,
+.services-page-landing-overlay,
+.learning-page-hero > div:nth-of-type(1),
+.compliance-hero > div:nth-of-type(1),
+.workshops-hero > div:nth-of-type(1),
+.contact-hero-overlay,
+.course-detail-overlay,
+.service-detail-hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(1, 37, 35, 0.91),
+    rgba(6, 57, 55, 0.64) 53%,
+    rgba(3, 46, 43, 0.2)
+  ) !important;
+}
+
+/* Contact form: concise required inputs, with no select controls. */
+.contact-form {
+  align-self: start;
+  padding: clamp(28px, 3vw, 38px);
+  background: #0d3d31;
+  color: #fff;
+}
+
+.contact-form-heading {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.contact-form-heading > svg { color: #c5e88f; flex: 0 0 auto; }
+.contact-form-heading p {
+  margin: 0 0 7px;
+  color: #c5e88f;
+  font: 700 10px/1.2 'DM Mono', monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.contact-form-heading h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  line-height: 1.05;
+  letter-spacing: -.05em;
+}
+
+.contact-form-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: #dcebe5;
+  font-size: 11px;
+  font-weight: 800;
+}
+.contact-form label span { color: #c5e88f; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(222, 242, 232, .25);
+  border-radius: 0;
+  outline: 0;
+  padding: 12px 13px;
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+  font: inherit;
+  font-weight: 500;
+  transition: border-color .2s ease, background .2s ease;
+}
+.contact-form input { min-height: 44px; }
+.contact-form textarea { min-height: 116px; resize: vertical; line-height: 1.5; }
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: #c5e88f; background: rgba(255, 255, 255, .1); }
+.contact-form-message { grid-column: 1 / -1; }
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 23px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #c5e88f;
+  color: #073d3c;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.contact-form button:hover { background: #e2f7bc; }
+
+@media (max-width: 560px) {
+  .contact-form { padding: 28px 22px; }
+  .contact-form-fields { grid-template-columns: 1fr; gap: 14px; }
+  .contact-form-message { grid-column: auto; }
+}
+
+/* Detail-page heroes follow the same landing viewport and copy rules as main pages. */
+@media (min-width: 701px) {
+  :is(.course-detail-hero, .service-detail-hero) {
+    min-height: max(70svh, 600px);
+    height: auto;
+    margin: clamp(18px, 2vw, 30px) clamp(18px, 2vw, 30px) 0;
+    border-radius: 20px 20px 0 20px;
+  }
+
+  :is(.course-detail-copy, .service-detail-hero-copy) {
+    width: min(60%, 690px);
+    max-width: calc(100% - 48px);
+    padding: clamp(118px, 15svh, 150px) 0 48px clamp(28px, 8vw, 128px);
+  }
+
+  :is(.course-detail-copy h1, .service-detail-hero-copy h1) {
+    max-width: 100%;
+    font-size: clamp(2.55rem, 4.5vw, 4.75rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  :is(.course-detail-copy, .service-detail-hero-copy) {
+    width: min(76%, 640px);
+    padding-left: clamp(28px, 7vw, 72px);
+  }
+}
+
+@media (max-width: 700px) {
+  :is(.course-detail-hero, .service-detail-hero) {
+    min-height: 620px;
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  :is(.course-detail-copy, .service-detail-hero-copy) {
+    width: 100%;
+    max-width: none;
+    padding: 104px 22px 48px;
+  }
+
+  :is(.course-detail-copy h1, .service-detail-hero-copy h1) {
+    max-width: 100%;
+    font-size: clamp(2.55rem, 11vw, 3.9rem);
+    line-height: 1.03;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  :is(.course-detail-copy > p:nth-of-type(2), .service-detail-hero-copy > p:not(.service-detail-kicker)) {
+    max-width: 34rem;
+    font-size: .9rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Course previews retain their full native frame so embedded video text is never cut off. */
+.course-detail-feature-media {
+  height: auto;
+  background: transparent;
+}
+
+.course-detail-feature-media video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Keep course details in view while the course story scrolls on larger screens. */
+.course-detail-page {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+@media (min-width: 701px) {
+  .course-detail-workspace .service-detail-rail {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
+}
+
+/* Allow the Home headline to reflow by phrase, never by splitting its highlighted word. */
+.reference-page .hero-copy-reference h1 {
+  max-width: 100%;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+.reference-page .hero-copy-reference h1 span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* All-courses cards use direct, borderless video media without cropping. */
+.learning-page .course-directory-grid article {
+  border: 0;
+}
+
+.learning-page .course-card-media {
+  background: transparent;
+}
+
+.learning-page .course-card-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  transform: none !important;
+}
+
+.learning-page .course-card-media,
+.learning-page .course-card-media video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.learning-page .course-card-media::after {
+  display: none;
 }
