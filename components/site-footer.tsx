@@ -141,12 +141,16 @@ export function SiteFooter() {
         aria-label="SEBI registration and compliance documents"
       >
         <div className="footer-registration">
+          <div className="footer-officers">
+            <section className="footer-officer footer-analyst">
           <p className="footer-compliance-kicker">
             SEBI registered research analyst
           </p>
           <h3>Rajesh Sharma</h3>
           <p className="footer-registration-number">
             Registration No. <b>INH000026628</b>
+            <br />
+            Enlistment No. <b>7140</b>
           </p>
           <dl>
             <div>
@@ -171,14 +175,94 @@ export function SiteFooter() {
               <dt>Validity</dt>
               <dd>05 May 2026 – Perpetual</dd>
             </div>
-            <div className="footer-registration-address">
-              <dt>Registered &amp; correspondence address</dt>
-              <dd>
-                RZ 25A, 1st Floor, Indira Park Extension Part 1, Uttam Nagar,
-                New Delhi, National Capital Territory of Delhi, 110059
-              </dd>
-            </div>
           </dl>
+            </section>
+            <section className="footer-officer">
+              <p className="footer-compliance-kicker">Compliance officer</p>
+              <h3>Rajesh Sharma</h3>
+              <dl>
+                <div>
+                  <dt>Email</dt>
+                  <dd>
+                    <a href="mailto:sharmaarajessh@gmail.com">
+                      sharmaarajessh@gmail.com
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Telephone</dt>
+                  <dd>
+                    <a href="tel:+918595587206">+91 85955 87206</a>
+                  </dd>
+                </div>
+                <div className="footer-officer-address">
+                  <dt>Address</dt>
+                  <dd>
+                    RZ 25A, 1st Floor, Indira Park Extension Part 1, Uttam
+                    Nagar, New Delhi, National Capital Territory of Delhi,
+                    110059
+                  </dd>
+                </div>
+              </dl>
+            </section>
+            <section className="footer-officer">
+              <p className="footer-compliance-kicker">Grievance officer</p>
+              <h3>Rajesh Sharma</h3>
+              <dl>
+                <div>
+                  <dt>Email</dt>
+                  <dd>
+                    <a href="mailto:sharmaarajessh@gmail.com">
+                      sharmaarajessh@gmail.com
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Telephone</dt>
+                  <dd>
+                    <a href="tel:+918595587206">+91 85955 87206</a>
+                  </dd>
+                </div>
+                <div className="footer-officer-address">
+                  <dt>Address</dt>
+                  <dd>
+                    RZ 25A, 1st Floor, Indira Park Extension Part 1, Uttam
+                    Nagar, New Delhi, National Capital Territory of Delhi,
+                    110059
+                  </dd>
+                </div>
+              </dl>
+            </section>
+          </div>
+          <section className="footer-addresses" aria-label="Contact addresses">
+            <p className="footer-compliance-kicker">Contact addresses</p>
+            <dl>
+              <div>
+                <dt>Registered &amp; correspondence address</dt>
+                <dd>
+                  RZ 25A, 1st Floor, Indira Park Extension Part 1, Uttam Nagar,
+                  New Delhi, National Capital Territory of Delhi, 110059
+                </dd>
+              </div>
+              <div>
+                <dt>SEBI Local Office</dt>
+                <dd>
+                  5th Floor, Bank of Baroda Building, 16, Sansad Marg, New
+                  Delhi, Delhi 110001 (Near Jantar Mantar)
+                  <br />
+                  Contact person: Rajesh Sharma
+                </dd>
+              </div>
+              <div>
+                <dt>SEBI Head Office</dt>
+                <dd>
+                  Securities and Exchange Board of India, SEBI Bhavan, Plot No.
+                  C4-A, G Block, Bandra Kurla Complex, Bandra (E), Mumbai –
+                  400051
+                </dd>
+              </div>
+            </dl>
+          </section>
         </div>
         <div className="footer-compliance-library">
           <div>

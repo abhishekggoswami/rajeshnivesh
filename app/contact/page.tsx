@@ -26,6 +26,9 @@ export default function ContactPage() {
             Whether you need help understanding a service, choosing a course or
             finding the right disclosure, start with a clear conversation.
           </p>
+          <a className="inner-hero-action" href="mailto:sharmaarajessh@gmail.com">
+            Email Rajesh <ArrowRight size={17} />
+          </a>
         </div>
       </section>
       <section className="contact-content">

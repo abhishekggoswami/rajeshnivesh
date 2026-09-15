@@ -1,4 +1,4 @@
-import { CalendarDays, MessageCircle, NotebookPen } from 'lucide-react';
+import { ArrowRight, CalendarDays, MessageCircle, NotebookPen } from 'lucide-react';
 import { SiteHeader } from '@/components/site-header';
 import { PageCta } from '@/components/page-cta';
 import { PageFeatureStrip } from '@/components/page-feature-strip';
@@ -27,6 +27,9 @@ export default function WorkshopsPage() {
             Focused sessions that turn research, risk and review into habits
             habits you can carry into your own routine.
           </p>
+          <a className="inner-hero-action" href="/learning">
+            Explore learning <ArrowRight size={17} />
+          </a>
         </div>
       </section>
       <section className="workshops-empty">

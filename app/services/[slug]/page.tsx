@@ -32,6 +32,9 @@ export default async function ServiceDetailPage({
           <p className="service-detail-kicker"><span /> {service.eyebrow}</p>
           <h1>{service.heroTitle}<br /><em>{service.heroEmphasis}</em></h1>
           <p>{service.description}</p>
+          {service.availability === 'launchingSoon' && (
+            <p className="service-detail-availability"><span /> Launching soon</p>
+          )}
           <a className="service-detail-primary" href="#overview">
             Explore the service <ArrowRight size={17} />
           </a>
@@ -80,7 +83,9 @@ export default async function ServiceDetailPage({
 
         <div className="service-detail-story">
           <figure className="service-detail-feature-image">
-            <img src="/services-office-background.jpg" alt="Modern office building representing a structured market process" />
+            <video autoPlay muted loop playsInline aria-label={`${service.title} service preview`}>
+              <source src={service.thumbnailVideo} type="video/mp4" />
+            </video>
           </figure>
           <article className="service-detail-story-copy">
             <p className="service-detail-kicker dark"><span /> A clear approach</p>
@@ -96,6 +101,18 @@ export default async function ServiceDetailPage({
               {service.benefits.map((benefit) => <li key={benefit}><Check size={16} /> {benefit}</li>)}
             </ul>
           </article>
+          <div className="service-detail-image-cards">
+            {service.imageCards.map((card, index) => (
+              <article key={card.title}>
+                <img src={card.image} alt={card.alt} />
+                <div>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

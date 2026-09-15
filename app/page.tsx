@@ -148,20 +148,26 @@ const monthlyComplaintTrend = [
   'Aug-26',
 ];
 
-const pricingServices = [
-  ['Market Analysis & Research', 2499],
-  ['Intraday & BTST Calls', 3499],
-  ['Options Trading Advisory', 3999],
-  ['Index Trading', 2999],
-  ['Delivery & Swing Trading', 2499],
-  ['Commodity Advisory (MCX)', 2999],
-  ['Risk Management Training', 1999],
-  ['Learning Programmes & Courses', 4999],
-  ['Market Mentorship & Workshops', 3499],
-] as const;
+type PricingService = {
+  name: string;
+  status: 'available' | 'launchingSoon' | 'learning';
+  prices?: Partial<Record<PricingTerm, number>>;
+};
+
+const pricingServices: PricingService[] = [
+  { name: 'Market Analysis & Research', status: 'launchingSoon' },
+  { name: 'Intraday & BTST Calls', status: 'launchingSoon' },
+  { name: 'Options Trading Advisory', status: 'launchingSoon' },
+  { name: 'Index Trading', status: 'available', prices: { monthly: 3000, quarterly: 8550, halfYearly: 16200, yearly: 28800 } },
+  { name: 'Delivery & Swing Trading', status: 'available', prices: { quarterly: 8260, halfYearly: 14750, yearly: 27500 } },
+  { name: 'Commodity Advisory (MCX)', status: 'available', prices: { monthly: 5000, quarterly: 14000, halfYearly: 27000, yearly: 50000 } },
+  { name: 'Risk Management Training', status: 'launchingSoon' },
+  { name: 'Learning Programmes & Courses', status: 'learning' },
+  { name: 'Market Mentorship & Workshops', status: 'launchingSoon' },
+];
 
 const pricingTerms = {
-  monthly: { label: 'Monthly', detail: 'Month-to-month access', multiplier: 1 },
+  monthly: { label: 'Monthly', detail: '1 month', multiplier: 1 },
   quarterly: {
     label: 'Quarterly',
     detail: '3 months · 5% package saving',
@@ -172,7 +178,10 @@ const pricingTerms = {
     detail: '6 months · 10% package saving',
     multiplier: 0.9 * 6,
   },
+  yearly: { label: 'Yearly', detail: '12 months', multiplier: 0.8 * 12 },
 } as const;
+
+type PricingTerm = keyof typeof pricingTerms;
 
 const navigation = [
   ['Home', '#home'],
@@ -249,8 +258,7 @@ export default function Home() {
     string[]
   >([]);
   const [pricingTerm, setPricingTerm] =
-    useState<keyof typeof pricingTerms>('monthly');
-  const [quoteReady, setQuoteReady] = useState(false);
+    useState<PricingTerm>('monthly');
   const servicesRef = useRef<HTMLElement | null>(null);
   const aboutRef = useRef<HTMLElement | null>(null);
   const guidanceRef = useRef<HTMLElement | null>(null);
@@ -268,18 +276,26 @@ export default function Home() {
     setCourseSlide((current) => (current + 1) % courses.length);
   };
   const togglePricingService = (service: string) => {
-    setQuoteReady(false);
     setSelectedPricingServices((current) =>
       current.includes(service)
         ? current.filter((item) => item !== service)
         : [...current, service],
     );
   };
-  const pricingSubtotal = pricingServices
-    .filter(([service]) => selectedPricingServices.includes(service))
-    .reduce((total, [, price]) => total + price, 0);
-  const pricingTotal = Math.round(
-    pricingSubtotal * pricingTerms[pricingTerm].multiplier,
+  const changePricingTerm = (term: PricingTerm) => {
+    setPricingTerm(term);
+    setSelectedPricingServices((current) =>
+      current.filter((name) =>
+        Boolean(pricingServices.find((service) => service.name === name)?.prices?.[term]),
+      ),
+    );
+  };
+  const selectedPricingServiceData = pricingServices.filter((service) =>
+    selectedPricingServices.includes(service.name),
+  );
+  const pricingTotal = selectedPricingServiceData.reduce(
+    (total, service) => total + (service.prices?.[pricingTerm] ?? 0),
+    0,
   );
   const formatInr = (value: number) =>
     new Intl.NumberFormat('en-IN', {
@@ -287,6 +303,13 @@ export default function Home() {
       currency: 'INR',
       maximumFractionDigits: 0,
     }).format(value);
+  const quotationMailto = `mailto:sharmaarajessh@gmail.com?subject=${encodeURIComponent(
+    `Quotation request: ${pricingTerms[pricingTerm].label} package`,
+  )}&body=${encodeURIComponent(
+    `Hello Rajesh Sharma,\n\nI would like a quotation for the following ${pricingTerms[pricingTerm].label.toLowerCase()} package:\n${selectedPricingServiceData
+      .map((service) => `- ${service.name}: ${formatInr(service.prices?.[pricingTerm] ?? 0)}`)
+      .join('\n')}\n\nEstimated total: ${formatInr(pricingTotal)}\n\nThank you.`,
+  )}`;
   useEffect(() => {
     const rail = courseRailRef.current;
     if (!rail) return;
@@ -476,7 +499,7 @@ export default function Home() {
         <div className="experience-card experience-card-desktop" aria-label="Rajesh Nivesh experience">
           <div>
             <strong>
-              16<sup>+</sup>
+              25<sup>+</sup>
             </strong>
             <p>
               Years of market
@@ -490,7 +513,7 @@ export default function Home() {
       <section className="experience-card experience-card-mobile" aria-label="Rajesh Nivesh experience">
           <div>
             <strong>
-              16<sup>+</sup>
+              25<sup>+</sup>
             </strong>
             <p>
               Years of market
@@ -929,21 +952,19 @@ export default function Home() {
         aria-label="Rajesh Nivesh achievements"
       >
         <div className="achievement-strip-copy">
-          Built on <b>16+ years</b> of market learning, research and disciplined
+          Built on <b>25+ years</b> of market learning, research and disciplined
           decision-making.
         </div>
         <div className="achievement-stats">
           <div>
             <b>
-              16<sup>+</sup>
+              25<sup>+</sup>
             </b>
             <span>Years of market learning</span>
           </div>
           <div>
-            <b>
-              1M<sup>+</sup>
-            </b>
-            <span>Research views</span>
+            <b>SEBI</b>
+            <span>Registered research analyst</span>
           </div>
           <div>
             <b>09</b>
@@ -971,26 +992,58 @@ export default function Home() {
               <span>{selectedPricingServices.length} selected</span>
             </div>
             <div className="pricing-service-list">
-              {pricingServices.map(([service, price]) => (
-                <label
-                  className={`pricing-service ${selectedPricingServices.includes(service) ? 'is-selected' : ''}`}
-                  key={service}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedPricingServices.includes(service)}
-                    onChange={() => togglePricingService(service)}
-                  />
-                  <span className="pricing-checkbox">
-                    <Check size={14} />
-                  </span>
-                  <span>{service}</span>
-                  <b>
-                    {formatInr(price)}
-                    <small>/ month</small>
-                  </b>
-                </label>
-              ))}
+              {pricingServices.map((service) => {
+                const price = service.prices?.[pricingTerm];
+
+                if (service.status === 'learning') {
+                  return (
+                    <a className="pricing-service is-learning" href="/learning" key={service.name}>
+                      <span className="pricing-checkbox"><ArrowRight size={14} /></span>
+                      <span>{service.name}</span>
+                      <b><small>Explore programmes</small></b>
+                    </a>
+                  );
+                }
+
+                if (service.status === 'launchingSoon') {
+                  return (
+                    <div className="pricing-service is-launching-soon" key={service.name}>
+                      <span className="pricing-checkbox" aria-hidden="true" />
+                      <span>{service.name}</span>
+                      <b><small>Launching soon</small></b>
+                    </div>
+                  );
+                }
+
+                if (price === undefined) {
+                  return (
+                    <div className="pricing-service is-unavailable" key={service.name}>
+                      <span className="pricing-checkbox" aria-hidden="true" />
+                      <span>{service.name}</span>
+                      <b><small>Available from quarterly</small></b>
+                    </div>
+                  );
+                }
+
+                return (
+                  <label
+                    className={`pricing-service ${selectedPricingServices.includes(service.name) ? 'is-selected' : ''}`}
+                    key={service.name}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedPricingServices.includes(service.name)}
+                      onChange={() => togglePricingService(service.name)}
+                    />
+                    <span className="pricing-checkbox"><Check size={14} /></span>
+                    <span>{service.name}</span>
+                    <b>
+                      {formatInr(price)}
+                      <small>/ {pricingTerms[pricingTerm].label.toLowerCase()}</small>
+                    </b>
+                  </label>
+                );
+              })}
             </div>
             <fieldset className="pricing-period">
               <legend>Choose a package period</legend>
@@ -1006,8 +1059,7 @@ export default function Home() {
                     key={term}
                     type="button"
                     onClick={() => {
-                      setPricingTerm(term);
-                      setQuoteReady(false);
+                      changePricingTerm(term);
                     }}
                   >
                     <b>{option.label}</b>
@@ -1030,21 +1082,16 @@ export default function Home() {
               Indicative pricing only. Final rates will be confirmed once the
               service plan is reviewed with you.
             </p>
-            <button
-              type="button"
-              disabled={!selectedPricingServices.length}
-              onClick={() => setQuoteReady(true)}
+            <a
+              className={!selectedPricingServices.length ? 'is-disabled' : ''}
+              href={selectedPricingServices.length ? quotationMailto : undefined}
+              aria-disabled={!selectedPricingServices.length}
+              onClick={(event) => {
+                if (!selectedPricingServices.length) event.preventDefault();
+              }}
             >
               Prepare my quotation <ArrowRight size={18} />
-            </button>
-            {quoteReady && (
-              <p className="pricing-confirmation" role="status">
-                Your {pricingTerms[pricingTerm].label.toLowerCase()} estimate
-                for {selectedPricingServices.length} selected service
-                {selectedPricingServices.length === 1 ? '' : 's'} is ready for
-                review.
-              </p>
-            )}
+            </a>
           </aside>
         </div>
       </section>
@@ -1071,7 +1118,7 @@ export default function Home() {
               <span>Complaint data to be displayed by RAs</span>
             </div>
             <p>
-              Data for the month ending:<strong>31st August, 2026</strong>
+              Data for the month ending: <strong>31st August 2026</strong>
             </p>
           </div>
           <div className="complaint-table-wrap">

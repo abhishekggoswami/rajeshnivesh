@@ -38,6 +38,7 @@ export default function MarketAnalysisResearchPage() {
             Daily market research designed to help you approach changing
             conditions with more structure, clarity and discipline.
           </p>
+          <p className="service-detail-availability"><span /> Launching soon</p>
           <a className="service-detail-primary" href="#overview">
             Explore the service <ArrowRight size={17} />
           </a>
@@ -128,10 +129,9 @@ export default function MarketAnalysisResearchPage() {
 
         <div className="service-detail-story">
           <figure className="service-detail-feature-image">
-            <img
-              src="https://img.capital.com/imgs/articles/1920x1140x0/shutterstock_2306186983_0.jpg"
-              alt="Professional reviewing market charts on a laptop"
-            />
+            <video autoPlay muted loop playsInline aria-label="Market analysis service preview">
+              <source src="/service-market-analysis.mp4" type="video/mp4" />
+            </video>
           </figure>
           <article className="service-detail-story-copy">
             <p className="service-detail-kicker dark">
@@ -190,8 +190,8 @@ export default function MarketAnalysisResearchPage() {
           <div className="service-detail-image-cards">
             <article>
               <img
-                src="https://framerusercontent.com/images/H3EpC0cRzxuCeZmsUEicFOKqg.png"
-                alt="Professionals discussing financial data at a meeting"
+                src="https://images.unsplash.com/photo-1640459958548-56c1c6717a40?auto=format&fit=crop&w=1200&q=85"
+                alt="Close-up of a market chart on a computer screen"
               />
               <div>
                 <span>01</span>
@@ -204,8 +204,8 @@ export default function MarketAnalysisResearchPage() {
             </article>
             <article>
               <img
-                src="https://www.inteligosab.com/documents/d/guest/asesoria-desktop"
-                alt="Professional reviewing a live market data interface"
+                src="https://www.stocktrak.com/wp-content/uploads/2016/12/Portfolio-Management-%E2%80%93-Fundamental-Analysis-Project.png"
+                alt="Financial documents, calculator and notebook arranged on a desk"
               />
               <div>
                 <span>02</span>

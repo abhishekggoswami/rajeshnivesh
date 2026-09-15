@@ -1,4 +1,4 @@
-import { CircleGauge, ShieldCheck, Target } from 'lucide-react';
+import { ArrowRight, CircleGauge, ShieldCheck, Target } from 'lucide-react';
 import { SiteHeader } from '@/components/site-header';
 import { PageFeatureStrip } from '@/components/page-feature-strip';
 import { ServicesFaq } from '@/components/services-faq';
@@ -33,9 +33,12 @@ export default function AboutPage() {
             value preparation, process and informed decision-making over
             speculation.
           </p>
+          <a className="inner-hero-action" href="#about-story">
+            Explore our approach <ArrowRight size={17} />
+          </a>
         </div>
       </section>
-      <section className="about-page-story">
+      <section id="about-story" className="about-page-story">
         <figure>
           <img src="/rajesh-seated-profile.png" alt="Rajesh Sharma" />
         </figure>
