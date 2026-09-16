@@ -21,6 +21,7 @@ import {
   Users,
   X,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { SiteFooter } from '@/components/site-footer';
 import { ServicesFaq } from '@/components/services-faq';
@@ -487,12 +488,12 @@ export default function Home() {
         <div className="hero-person" aria-hidden="true">
           <img src="/hero-main-portrait.png" alt="" />
         </div>
-        <button className="slider-arrow arrow-left" aria-label="Previous slide">
+        <a className="slider-arrow arrow-left" href="#about" aria-label="Explore about Rajesh Nivesh">
           <ArrowDownRight />
-        </button>
-        <button className="slider-arrow arrow-right" aria-label="Next slide">
+        </a>
+        <a className="slider-arrow arrow-right" href="#services" aria-label="Explore services">
           <ArrowRight />
-        </button>
+        </a>
         <div className="hero-scroll">
           Scroll down <ArrowDownRight />
         </div>
@@ -997,11 +998,11 @@ export default function Home() {
 
                 if (service.status === 'learning') {
                   return (
-                    <a className="pricing-service is-learning" href="/learning" key={service.name}>
+                    <Link className="pricing-service is-learning" href="/learning" key={service.name}>
                       <span className="pricing-checkbox"><ArrowRight size={14} /></span>
                       <span>{service.name}</span>
                       <b><small>Explore programmes</small></b>
-                    </a>
+                    </Link>
                   );
                 }
 

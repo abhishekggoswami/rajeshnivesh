@@ -1,4 +1,6 @@
-import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
+import Link from 'next/link';
+import { ContactForm } from '@/components/contact-form';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { PageFeatureStrip } from '@/components/page-feature-strip';
@@ -73,52 +75,14 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        <form
-          className="contact-form"
-          action="mailto:sharmaarajessh@gmail.com?subject=Enquiry%20for%20Rajesh%20Nivesh"
-          method="post"
-          encType="text/plain"
-        >
-          <div className="contact-form-heading">
-            <MessageCircle size={23} />
-            <div>
-              <p>Send an enquiry</p>
-              <h3>Tell us how we can help.</h3>
-            </div>
-          </div>
-          <div className="contact-form-fields">
-            <label>
-              Full name <span>*</span>
-              <input name="name" type="text" autoComplete="name" required />
-            </label>
-            <label>
-              Email address <span>*</span>
-              <input name="email" type="email" autoComplete="email" required />
-            </label>
-            <label>
-              Phone number <span>*</span>
-              <input name="phone" type="tel" autoComplete="tel" required />
-            </label>
-            <label>
-              Subject <span>*</span>
-              <input name="subject" type="text" required />
-            </label>
-            <label className="contact-form-message">
-              Your message <span>*</span>
-              <textarea name="message" rows={5} required />
-            </label>
-          </div>
-          <button type="submit">
-            Send enquiry <ArrowRight size={17} />
-          </button>
-        </form>
+        <ContactForm />
       </section>
       <PageFeatureStrip title="Find the right research or learning support for your question." />
       <section className="contact-compliance-note">
         <p>
           <b>Investor support:</b> For formal grievance information and
           disclosure documents, please visit our{' '}
-          <a href="/compliance">Compliance page</a>. Investments in securities
+            <Link href="/compliance">Compliance page</Link>. Investments in securities
           are subject to market risks.
         </p>
       </section>

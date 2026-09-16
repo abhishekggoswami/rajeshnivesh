@@ -1,4 +1,5 @@
 import { ArrowRight, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 const navigation = [
   ['Home', '/'],
@@ -129,9 +130,9 @@ export function SiteFooter() {
               aria-label="Email address"
               placeholder="Enter email"
             />
-            <button type="button" aria-label="Subscribe to updates">
+            <Link href="/contact" aria-label="Contact us to subscribe to updates">
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
           <small>Receive research and learning updates.</small>
         </div>

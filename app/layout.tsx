@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { LandingVideoSpeed } from '@/components/landing-video-speed';
 import { WhatsAppContact } from '@/components/whatsapp-contact';
 import './globals.css';
 import './card-overrides.css';
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}<WhatsAppContact /></body></html>;
+  return <html lang="en"><body>{children}<LandingVideoSpeed /><WhatsAppContact /></body></html>;
 }
