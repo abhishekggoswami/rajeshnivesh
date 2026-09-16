@@ -6610,13 +6610,13 @@
     .service-detail-hero-copy
   ) {
     min-height: 100%;
-    padding-top: clamp(120px, 14.25svh, 161.25px);
-    padding-bottom: clamp(54px, 6.75svh, 81px);
+    padding-top: clamp(126px, 14.5svh, 156px);
+    padding-bottom: clamp(58px, 6.75svh, 78px);
   }
 
   .course-detail-copy {
     min-height: 100%;
-    padding-top: clamp(116.25px, 14.25svh, 157.5px);
+    padding-top: clamp(126px, 14.5svh, 156px);
   }
 
   :is(
@@ -6629,7 +6629,7 @@
     .course-detail-copy h1,
     .service-detail-hero-copy h1
   ) {
-    font-size: clamp(1.9125rem, 3.375vw, 3.5625rem);
+    font-size: clamp(1.8rem, 3vw, 3.3rem);
   }
 
   :is(
@@ -6643,7 +6643,7 @@
     .service-detail-hero-copy
   ) > p:first-child {
     gap: 6.75px;
-    font-size: 7.5px;
+    font-size: clamp(0.55rem, 0.62vw, 0.65rem);
   }
 
   :is(
@@ -6670,12 +6670,12 @@
     .course-detail-copy > p:nth-of-type(2),
     .service-detail-hero-copy > p:not(.service-detail-kicker):not(.service-detail-availability)
   ) {
-    font-size: 11.25px;
+    font-size: clamp(0.78rem, 0.85vw, 0.875rem);
   }
 
   .service-detail-hero-copy > p.service-detail-availability {
-    margin-top: 11.25px;
-    font-size: 7.5px;
+    margin-top: 12px;
+    font-size: clamp(0.55rem, 0.62vw, 0.65rem);
   }
 
   :is(
@@ -6688,10 +6688,10 @@
     .course-detail-copy,
     .service-detail-hero-copy
   ) > a {
-    gap: 7.5px;
-    margin-top: 20.25px;
-    padding: 11.25px 16.5px;
-    font-size: 9px;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 12px 17px;
+    font-size: clamp(0.65rem, 0.75vw, 0.72rem);
   }
 }
 
