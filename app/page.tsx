@@ -781,7 +781,12 @@ export default function Home() {
             </a>
           </div>
           <div className="guidance-portrait" aria-hidden="true">
-            <img src="/rajesh-guidance-portrait.png" alt="" />
+            <img
+              src="/rajesh-guidance-portrait.png"
+              alt=""
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
           <div className="guidance-benefits">
             <h3>

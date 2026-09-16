@@ -3277,6 +3277,165 @@
   }
 }
 
+/* Section labels are intentionally plain text: orange, bold, and icon-free
+   throughout the site at every breakpoint. */
+:is(
+  .orange-kicker,
+  .guidance-kicker,
+  .courses-kicker,
+  .detail-kicker,
+  .service-detail-kicker,
+  .services-faq-kicker,
+  .eyebrow,
+  .section-kicker
+) {
+  color: #f05429 !important;
+  font-weight: 800 !important;
+}
+
+:is(
+  .orange-kicker,
+  .guidance-kicker,
+  .courses-kicker,
+  .detail-kicker,
+  .service-detail-kicker,
+  .services-faq-kicker,
+  .eyebrow,
+  .section-kicker
+) > :is(b, span) {
+  display: none !important;
+}
+
+:is(
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child
+) > p:first-child {
+  color: #f05429 !important;
+  font-weight: 800 !important;
+}
+
+:is(
+  .about-page-hero-copy,
+  .learning-page-hero > div:last-child,
+  .compliance-hero > div:last-child,
+  .workshops-hero > div:last-child,
+  .contact-hero > div:last-child
+) > p:first-child > span {
+  display: none !important;
+}
+
+/* The portrait remains a visible, eager foreground image on narrow screens. */
+@media (max-width: 760px) {
+  .market-guidance .guidance-portrait,
+  .market-guidance.is-visible .guidance-portrait {
+    align-self: stretch !important;
+  }
+
+  .market-guidance .guidance-portrait img,
+  .market-guidance.is-visible .guidance-portrait img {
+    z-index: 4 !important;
+    pointer-events: none;
+  }
+}
+
+/* Home About media: a calmer, intentional phone-only stack. */
+@media (max-width: 700px) {
+  .about-reference .about-media {
+    min-height: 555px;
+  }
+
+  .about-reference .about-image {
+    width: 86%;
+    height: 260px;
+    border-radius: 18px 68px 0 18px;
+  }
+
+  .about-reference .about-grid-dots {
+    top: 8px;
+    width: 102px;
+    height: 132px;
+    opacity: 0.78;
+  }
+
+  .about-reference .about-orange-shape {
+    top: 210px;
+    left: 40%;
+    width: 50%;
+    height: 92px;
+  }
+
+  .about-reference .happy-card {
+    right: 0;
+    bottom: 0;
+    width: 49%;
+    height: 220px;
+    padding: 20px 17px;
+    border-radius: 14px 14px 0 14px;
+  }
+
+  .about-reference .happy-card p {
+    margin-bottom: 9px;
+    font-size: 10px;
+  }
+
+  .about-reference .happy-card strong {
+    font-size: 2.65rem;
+  }
+
+  .about-reference .happy-card img {
+    right: -18px;
+    height: 178px;
+  }
+
+  .about-reference .about-profile-card {
+    bottom: 18px;
+    left: 0;
+    width: 57%;
+    min-height: 86px;
+    padding: 12px 13px;
+    gap: 10px;
+    border-radius: 12px 12px 12px 0;
+  }
+
+  .about-reference .about-profile-card > img {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+  }
+
+  .about-reference .about-profile-card strong {
+    font-size: 12px;
+  }
+
+  .about-reference .about-profile-card span {
+    margin-top: 4px;
+    font-size: 8px;
+    line-height: 1.35;
+  }
+}
+
+:is(
+  .services-page-landing-copy,
+  .course-detail-copy,
+  .service-detail-hero-copy
+) > p:first-child,
+.page-cta > p:first-child {
+  color: #f05429 !important;
+  font-weight: 800 !important;
+}
+
+:is(
+  .services-page-landing-copy,
+  .course-detail-copy,
+  .service-detail-hero-copy
+) > p:first-child > span,
+.page-cta > p:first-child > span {
+  display: none !important;
+}
+
 /* Keep every service and programme hero comfortably below its navigation. */
 @media (min-width: 761px) {
   :is(.course-detail-copy, .service-detail-hero-copy) {
@@ -6729,6 +6888,152 @@
 
   .market-guidance .guidance-portrait img,
   .market-guidance.is-visible .guidance-portrait img {
-    display: none !important;
+    display: block !important;
+  }
+}
+
+/* Draw a browser-independent marker instead of relying on the Unicode star,
+   which iOS may substitute with a coloured emoji glyph. */
+:is(.orange-kicker, .guidance-kicker, .courses-kicker) b {
+  position: relative;
+  flex: 0 0 auto;
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+:is(.orange-kicker, .guidance-kicker, .courses-kicker) b::before {
+  content: '';
+  display: block;
+  width: 13px;
+  height: 13px;
+  background:
+    linear-gradient(#fff, #fff) center / 2px 100% no-repeat,
+    linear-gradient(#fff, #fff) center / 100% 2px no-repeat,
+    linear-gradient(45deg, transparent 43%, #fff 44% 56%, transparent 57%),
+    linear-gradient(-45deg, transparent 43%, #fff 44% 56%, transparent 57%);
+}
+
+:is(.orange-kicker, .guidance-kicker, .courses-kicker) b::after {
+  content: none !important;
+}
+
+/* Keep Rajesh as an explicit foreground image on phones and small tablets.
+   This replaces the unreliable iOS background-image fallback. */
+@media (max-width: 760px) {
+  .market-guidance .guidance-portrait,
+  .market-guidance.is-visible .guidance-portrait {
+    position: relative !important;
+    display: block !important;
+    order: 2 !important;
+    height: clamp(420px, 128vw, 560px) !important;
+    min-height: 420px !important;
+    margin: 0 -22px !important;
+    overflow: hidden !important;
+    isolation: isolate;
+    clip-path: none !important;
+    background:
+      linear-gradient(rgba(84, 159, 163, 0.22) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(84, 159, 163, 0.22) 1px, transparent 1px),
+      linear-gradient(145deg, #dceeed, #effafa 58%, #d2e7e4) !important;
+    background-size: 40px 40px, 40px 40px, auto !important;
+    background-position: center bottom !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .market-guidance .guidance-portrait img,
+  .market-guidance.is-visible .guidance-portrait img {
+    position: absolute !important;
+    z-index: 2 !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: translateX(-50%) !important;
+    clip-path: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: none !important;
+    filter: drop-shadow(0 16px 19px rgba(5, 54, 51, 0.18)) !important;
+  }
+}
+
+/* Final phone-only refinement for the Home About media stack. */
+@media (max-width: 700px) {
+  .about-reference .about-media {
+    min-height: 555px;
+  }
+
+  .about-reference .about-image {
+    width: 86%;
+    height: 260px;
+    border-radius: 18px 68px 0 18px;
+  }
+
+  .about-reference .about-grid-dots {
+    top: 8px;
+    width: 102px;
+    height: 132px;
+    opacity: 0.78;
+  }
+
+  .about-reference .about-orange-shape {
+    top: 210px;
+    left: 40%;
+    width: 50%;
+    height: 92px;
+  }
+
+  .about-reference .happy-card {
+    right: 0;
+    bottom: 0;
+    width: 49%;
+    height: 220px;
+    padding: 20px 17px;
+    border-radius: 14px 14px 0 14px;
+  }
+
+  .about-reference .happy-card p {
+    margin-bottom: 9px;
+    font-size: 10px;
+  }
+
+  .about-reference .happy-card strong {
+    font-size: 2.65rem;
+  }
+
+  .about-reference .happy-card img {
+    right: -18px;
+    height: 178px;
+  }
+
+  .about-reference .about-profile-card {
+    bottom: 18px;
+    left: 0;
+    width: 57%;
+    min-height: 86px;
+    padding: 12px 13px;
+    gap: 10px;
+    border-radius: 12px 12px 12px 0;
+  }
+
+  .about-reference .about-profile-card > img {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+  }
+
+  .about-reference .about-profile-card strong {
+    font-size: 12px;
+  }
+
+  .about-reference .about-profile-card span {
+    margin-top: 4px;
+    font-size: 8px;
+    line-height: 1.35;
   }
 }
