@@ -51,7 +51,6 @@ const sources = [
   'Other Sources (if any)',
 ];
 const monthlyComplaintTrend = [
-  'Sep-25',
   'Oct-25',
   'Nov-25',
   'Dec-25',
@@ -63,6 +62,7 @@ const monthlyComplaintTrend = [
   'Jun-26',
   'Jul-26',
   'Aug-26',
+  'Sep-26',
 ];
 
 export default function CompliancePage() {
@@ -111,8 +111,9 @@ export default function CompliancePage() {
               <b>Annexure – B</b>
               <span>Complaint data to be displayed by RAs</span>
             </div>
-            <p>
-              Data for the month ending:<strong>31st August, 2026</strong>
+            <p className="complaint-reporting-date">
+              <span>Data for the month ending</span>
+              <strong>30th September 2026</strong>
             </p>
           </div>
           <div className="complaint-table-wrap">
@@ -213,7 +214,7 @@ export default function CompliancePage() {
           <div className="complaint-board-title">
             <div>
               <b>Trend of monthly complaint disposal</b>
-              <span>(Sep-25 – Aug-26)</span>
+              <span>(Oct-25 – Sep-26)</span>
             </div>
           </div>
           <div className="complaint-table-wrap">
